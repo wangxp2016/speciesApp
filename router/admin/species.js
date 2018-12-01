@@ -11,6 +11,7 @@ router
     .post('/speciesadd', upload.configure(), async (ctx) => {
         const species = ctx.request.body,
             speciesTime = moment().unix(),
+            keyWord =  species.species.substring(0,1),
             distribution_img = upload.pathHandle(ctx, 'distribution_img'), // 获取图片路径
             morphology_img = upload.pathHandle(ctx, 'morphology_img'); // 获取图片路径
 
@@ -39,7 +40,8 @@ router
                 species.pronotum_length_female,
                 species.literature,
                 speciesTime,
-                species.remark);
+                species.remark,
+                keyWord);
             if (data.affectedRows) {
                 // 新增成功
                 ctx.body = info.suc('新增成功！');
@@ -115,6 +117,7 @@ router
                 morphologySite = upload.fileUpdate(ctx, 'morphology_img', morphologyList, 'morphology_img'); // 修改图片路径
             }
             let speciesTime = moment().unix();
+            let keyWord =  species.species.substring(0,1),
             const data = await speciesModel.speciesEdit(
                 species.id,
                 species.order,
@@ -139,7 +142,8 @@ router
                 species.pronotum_length_female,
                 species.literature,
                 speciesTime,
-                species.remark
+                species.remark,
+                keyWord
             );
             if (data.affectedRows) {
                 // 修改成功

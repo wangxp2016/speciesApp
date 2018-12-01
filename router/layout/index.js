@@ -9,8 +9,8 @@ router.use('common',require('./common'));
 // 网站商品模块
 router.use('goods',require('./goods'));
 
-// 网站案例模块
-router.use('product',require('./product'));
+// 网站检索模块
+router.use('overview',require('./overview'));
 
 // 网站商品详,网站案例详情 模块
 router.use('goodsDetail',require('./goods_detail'));

@@ -4,7 +4,7 @@ const moment = require('moment');
 module.exports = {
 
     // 商品添加
-    speciesAdd(order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male,body_length_female, forewing_length_male,forewing_length_female, hindFemur_length_male,hindFemur_length_female, pronotum_length_male,pronotum_length_female, literature, species_time, remark) {
+    speciesAdd(order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male, body_length_female, forewing_length_male, forewing_length_female, hindFemur_length_male, hindFemur_length_female, pronotum_length_male, pronotum_length_female, literature, species_time, remark,keyWord) {
 
         // 默认值判断
         !order_m ? order_m = `` : ``;
@@ -29,10 +29,11 @@ module.exports = {
         !pronotum_length_female ? pronotum_length_female = `` : ``;
         !literature ? literature = `` : ``;
         !remark ? remark = `` : ``;
+        !keyWord ? keyWord = `` : ``;
 
         // 插入数据
-        return sql.query(`INSERT INTO species (order_m,suborder,superfamily,family,subfamily,genus,species,introduction,distribution_img,distribution,morphology_img,body_color,body_length_male,body_length_female, forewing_length_male,forewing_length_female, hindFemur_length_male,hindFemur_length_female, pronotum_length_male,pronotum_length_female,literature,species_time,remark) VALUES 
-            ('${order_m}','${suborder}','${superfamily}','${family}','${subfamily}','${genus}','${species}','${introduction}','${distribution_img}','${distribution}','${morphology_img}','${body_color}','${body_length_male}','${body_length_female}','${forewing_length_male}','${forewing_length_female}','${hindFemur_length_male}','${hindFemur_length_female}','${pronotum_length_male}','${pronotum_length_female}','${literature}','${species_time}','${remark}');`);
+        return sql.query(`INSERT INTO species (order_m,suborder,superfamily,family,subfamily,genus,species,introduction,distribution_img,distribution,morphology_img,body_color,body_length_male,body_length_female, forewing_length_male,forewing_length_female, hindFemur_length_male,hindFemur_length_female, pronotum_length_male,pronotum_length_female,literature,species_time,remark,keyWord) VALUES 
+            ('${order_m}','${suborder}','${superfamily}','${family}','${subfamily}','${genus}','${species}','${introduction}','${distribution_img}','${distribution}','${morphology_img}','${body_color}','${body_length_male}','${body_length_female}','${forewing_length_male}','${forewing_length_female}','${hindFemur_length_male}','${hindFemur_length_female}','${pronotum_length_male}','${pronotum_length_female}','${literature}','${species_time}','${remark}','${keyWord}');`);
     },
 
     // 查询商品列表
@@ -75,13 +76,35 @@ module.exports = {
         return sql.query(`SELECT id,order_m,suborder,superfamily FROM species GROUP BY superfamily ;`);
     },
 
+    // speciesOverview
+    speciesOverview(page, pagesize, word) {
+        // 查询条件设置
+        let condition = `WHERE 1=1`;
+        word ? condition = `WHERE species LIKE '${word}%'` : ``;
+        // 总记录数
+        const totalRows = sql.query(`SELECT COUNT(species) AS n FROM species ${condition};`);
+
+        // 查询语句
+        const list = sql.query(
+            `SELECT id,species FROM species ${condition} GROUP BY species ORDER BY species ASC  LIMIT ${(page-1)*pagesize},${pagesize};`
+        );
+        return {
+            totalRows, // 总记录数
+            list // 数据分页
+        };
+    },
+     // 查询物种tree
+     speciesOverviewNum() {
+        return sql.query(`SELECT keyWord,COUNT(keyWord) num FROM species GROUP BY keyWord;`);
+    },
+
     // 查询物种tree
     speciesListByName(name, type, classType) {
         return sql.query(`SELECT id,${classType} FROM species where ${type} = '${name}' GROUP BY ${classType} ;`);
     },
 
     // 修改物种
-    speciesEdit(id, order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male,body_length_female,forewing_length_male, forewing_length_female, hindFemur_length_male, hindFemur_length_female,pronotum_length_male,pronotum_length_female, literature, species_time, remark) {
+    speciesEdit(id, order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male, body_length_female, forewing_length_male, forewing_length_female, hindFemur_length_male, hindFemur_length_female, pronotum_length_male, pronotum_length_female, literature, species_time, remark,keyWord) {
 
         // 默认值判断
         !order_m ? order_m = `` : ``;
@@ -105,6 +128,7 @@ module.exports = {
         !pronotum_length_female ? pronotum_length_female = `` : ``;
         !literature ? literature = `` : ``;
         !remark ? remark = `` : ``;
+        !keyWord ? keyWord = `` : ``;
 
         // 修改数据
         return sql.query(`UPDATE species SET 
@@ -131,6 +155,7 @@ module.exports = {
         literature='${literature}',
         species_time='${species_time}',
         remark='${remark}' 
+        keyWord='${keyWord}' 
         WHERE id=${id};`);
     },
 

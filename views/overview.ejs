@@ -6,61 +6,95 @@
 </head>
 
 <body>
-
-
     <!--[if lt IE 8]>
 	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 	<![endif]-->
 
     <div class="wrapper">
         <% include header.ejs %>
-        <!--Breadcrumb One Start-->
-        <div class="breadcrumb-one mb-120">
+        <!--Shop Area Start-->
+        <div class="shop-area mb-70">
             <div class="container">
                 <div class="row">
-                    <div class="col-12">
-                        <div class="breadcrumb-img">
-                            <img src="/layout/img/page-banner/product-banner.jpg" alt="">
-                        </div>
-                        <div class="breadcrumb-content">
-                            <ul>
-                                <li><a href="/">Home</a></li>
-                                <li class="active">Single Species</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="product-description-review-area mb-100">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="product-review-tab">
-                            <!--Review And Description Tab Menu Start-->
-                            <ul class="nav dec-and-review-menu">
-                                <li>
-                                    <a class="active" data-toggle="tab" href="#description">物种信息</a>
-                                </li>
-                            </ul>
-
-                            <div class="left_echarts" id="main" style="height:600px;width:100%;"></div>
-
-                            <!-- file download end-->
-                            <!--Review And Description Tab Content Start-->
-                            <div class="tab-content product-review-content-tab" id="myTabContent-4">
-                                <div class="tab-pane fade active show" id="description">
-                                    <div class="single-product-description">
-
-                                    </div>
+                    <div class="col-lg-12 order-1 order-lg-2">
+                        <div class="shop-layout">
+                            <!--Breadcrumb One Start-->
+                            <div class="breadcrumb-one mb-50">
+                                <div class="breadcrumb-img">
+                                    <img src="/layout/img/page-banner/product-banner.jpg" alt="">
                                 </div>
                             </div>
-                            <!--Review And Description Tab Content End-->
+                            <div class="shop-product">
+                                <div id="myTabContent-2" class="tab-content">
+                                    <div class="row">
+                                        <section class="col-sm-12">
+                                            <a id="main-content"></a>
+                                            <h1 class="page-header">Species Overview</h1>
+                                            <div class="region region-content">
+                                                <section id="block-system-main" class="block block-system clearfix">
+                                                    <div class="view-species-glossary view-id-species_glossary view-display-id-page view-dom-id-61818f7a4d8f5d43003ce67afeffa67f jquery-once-1-processed">
+                                                        <div class="view-header">
+                                                            <b>Total number of i5k Workspace organisms:
+                                                                <%=speciesList.totalRows%></b><br>&nbsp;
+                                                        </div>
+                                                        <div class="attachment attachment-before">
+                                                            <div class="view-species-glossary view-id-species_glossary view-display-id-attachment">
+                                                                <div class="view-content">
+                                                                    <% for(let i=0;i<num.length;i++){%>
+                                                                    <span class="views-summary views-summary-unformatted">
+                                                                        <a href="/overview?page=1&word=<%=num[i].keyWord%>">
+                                                                            <%=num[i].keyWord%></a>(
+                                                                        <%=num[i].num%>)
+                                                                    </span>
+                                                                    <span>|</span>
+                                                                    <%}%>
+                                                                    <span class="views-summary views-summary-unformatted">
+                                                                        <a href="/overview?page=1">ALL</a>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="view-content">
+                                                            <div class="table-responsive">
+                                                                <table class="views-table cols-1 table table-hover table-striped">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th class="views-field views-field-title">
+                                                                                Title </th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <% let data = speciesList.dataList%>
+                                                                        <% for(let i=0;i<data.length;i++){%>
+                                                                        <tr class="odd views-row-first">
+                                                                            <td class="views-field views-field-title">
+                                                                                <a href="speciesDetail?species=<%=data[i].species%>"
+                                                                                    </a> <%=data[i].species%></a></td>
+                                                                        </tr>
+                                                                        <%}%>
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <!--Pagination Start-->
+                                    <div class="product-pagination">
+                                        <ul id="jqpaginatorId"></ul>
+                                    </div>
+                                    <!--Pagination End-->
+                                </div>
+                            </div>
+                            <!--Shop Product End-->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!--Shop Area End-->
         <% include footer.ejs %>
         <!-- Modal Area Strat -->
         <div class="modal fade" id="open-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -160,7 +194,7 @@
                                         <span class="old-price">$74.00</span>
                                         <span class="new-price">$69.00</span>
                                     </div>
-                                    <a href="single-product.ejs" class="see-all">See all features</a>
+                                    <a href="/goodsDetail" class="see-all">See all features</a>
                                     <div class="add-to-cart quantity">
                                         <form class="add-quantity" action="#">
                                             <div class="modal-quantity">
@@ -196,122 +230,75 @@
             </div>
         </div>
         <!-- Modal Area End -->
-
-        <!-- 联系我们 -->
-        <div class="modal fade companyModel" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
-            data-backdrop="static" data-keyboard="false">
-            <div class="modal-dialog modal-sm" role="document">
-                <div class="modal-content">
-                    <div class="modal-header"></div>
-                    <div class="modal-body">
-                        <div class="tab-content">
-                            <div class="tab-pane active">
-                                <style>
-                                    .list-unstyled p {
-                                        display: inline-block;
-                                        margin-left: 10px;
-                                    }
-
-                                    .list-unstyled a {
-                                        color: #a43d21
-                                    }
-                                </style>
-                                <ul class="list-unstyled activity-timeline">
-                                    <li>
-                                        <i class="lnr lnr-apartment activity-icon"></i>
-                                        <p class="AddressId"></p>
-                                    </li>
-                                    <li>
-                                        <i class="lnr lnr-phone activity-icon"></i>
-                                        <a href="" class="PhoneIdLink">
-                                            <p class="PhoneId"></p>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <i class="lnr lnr-link activity-icon"></i>
-                                        <p class="EmailId"></p>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-xs btn-primary" data-dismiss="modal">关闭</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
     <% include script.ejs %>
-    <script src="/layout/js/lodash.min.js"></script>
-    <script src="/layout/js/uitl.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            var myChart = echarts.init(document.getElementById('main'));
-            myChart.showLoading();
-            $.get('/species/speciesTree', function (data) {
-                var originData = data;
-                myChart.hideLoading();
-                var option = {
-                    tooltip: {
-                        trigger: 'item',
-                        triggerOn: 'mousemove'
-                    },
-                    series: [{
-                        type: 'tree',
-                        data: [data],
-                        top: '1%',
-                        left: '7%',
-                        bottom: '1%',
-                        right: '20%',
+    <script src="/layout/js/jqpaginator.min.js"></script>
+    <style>
+        .first a,
+        .prev a,
+        .next a,
+        .last a {
+            width: 64px !important;
+        }
 
-                        symbolSize: 7,
+        .page-header {
+            padding-bottom: 9px;
+            margin: 40px 0 20px;
+            border-bottom: 1px solid #eeeeee;
+        }
 
-                        label: {
-                            normal: {
-                                position: 'left',
-                                verticalAlign: 'middle',
-                                align: 'right',
-                                fontSize: 9
-                            }
-                        },
+        .tab-content a {
+            color: #ef6c00;
+            text-decoration: none;
+        }
 
-                        leaves: {
-                            label: {
-                                normal: {
-                                    position: 'right',
-                                    verticalAlign: 'middle',
-                                    align: 'left'
-                                }
-                            }
-                        },
+        .product-pagination>ul {
+            text-align: center;
+            padding-top: 30px;
+            margin-bottom: 40px;
+            /*border-top: 1px solid #e5e5e5;*/
+        }
 
-                        expandAndCollapse: true,
-                        animationDuration: 550,
-                        initialTreeDepth: 6,
-                        animationDurationUpdate: 750
-                    }]
+        .actives a {
+            cursor: text
+        }
+
+        .actives a:hover {
+            color: #ffffff !important;
+        }
+    </style>
+    <script>
+        var word = '',
+            hrefId = '';
+        location.href.search('word') > -1 ? word = location.href.split('word')[1].split('=')[1] : word = '';
+
+        // 设置跳转地址
+        hrefId = '/overview';
+
+        // 分页及参数设置
+        try {
+            $('#jqpaginatorId').jqPaginator({
+                totalPages: parseInt('<%=speciesList.totalPage%>'),
+                totalCounts: parseInt('<%=speciesList.totalRows%>'),
+                visiblePages: 5,
+                currentPage: parseInt('<%=speciesList.page%>'),
+                activeClass: 'actives',
+                disableClass: 'actives',
+                first: '<li class="first"><a href="/overview?page=1&word=' + word + '">首页</a></li>',
+                prev: '<li class="prev""><a  href="/overview?page={{page}}&word=' + word + '">上一页</a></li>',
+                next: '<li class="next"><a  href="/overview?page={{page}}&word=' + word + '">下一页</a></li>',
+                last: '<li class="last"><a  href="/overview?page={{totalPages}}&word=' + word + '">尾页</a></li>',
+                page: '<li class="page"><a  href="/overview?page={{page}}&word=' + word + '">{{page}}</a></li>',
+                onPageChange: function (num) {
+                    // $('#text').html('当前第' + num + '页');
+                    $('.actives a').removeAttr('href');
                 }
-                myChart.setOption(option);
-                myChart.on('click', function (params) {
-                    var treeData = params.data;
-                    if (treeData.children && treeData.children.length == 0) {
-                        if (treeData.type == 'species') {
-                            window.location.href='/speciesDetail?species='+treeData.name;
-                        } else {
-                            $.get('/species/getDataByKeyWord?name=' + treeData.name + '&type=' +
-                                treeData.type,
-                                function (data) {
-                                    var newData = addNode([originData], data, -1);
-                                    option.series[0].data = newData;
-                                    console.log("option.series[0].data", option.series[0].data);
-                                    myChart.setOption(option);
-                                })
-                        }
-                    }
-                });
             });
-        })
+        } catch (e) {
+            $('#info').css({
+                'display': 'block'
+            })
+        }
     </script>
 </body>
 
