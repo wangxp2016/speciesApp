@@ -1,0 +1,433 @@
+<div ng-controller="navCtrl">
+<!-- NAVBAR -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="brand">
+        <a ><img ng-src={{logoUrl}} alt="Klorofil Logo" class="img-responsive logo" width="136" height="59"></a>
+    </div>
+    <div class="container-fluid">
+        <div class="navbar-btn">
+            <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+        </div>
+        <!--<form class="navbar-form navbar-left">
+            <div class="input-group">
+                <input type="text" value="" class="form-control" placeholder="Search dashboard..." autocomplete="off">
+                <span class="input-group-btn"><button type="button" class="btn btn-primary">Go</button></span>
+            </div>
+        </form>-->
+        <!--<div class="navbar-btn navbar-btn-right">
+            <a class="btn btn-success update-pro" title="Upgrade to Pro" target="_blank"><i class="fa fa-rocket"></i> <span>UPGRADE TO PRO</span></a>
+        </div>-->
+        <div id="navbar-menu">
+            <ul class="nav navbar-nav navbar-right">
+                <!--<li class="dropdown" style="cursor: pointer">
+                    <a class="dropdown-toggle icon-menu" data-toggle="dropdown">
+                        <i class="lnr lnr-alarm"></i>
+                        &lt;!&ndash;<span class="badge bg-danger">5</span>&ndash;&gt;
+                    </a>
+                    <ul class="dropdown-menu notifications">
+                        <li><a class="notification-item"><span class="dot bg-warning"></span>System space is almost full</a></li>
+                        <li><a class="notification-item"><span class="dot bg-danger"></span>You have 9 unfinished tasks</a></li>
+                        <li><a class="notification-item"><span class="dot bg-success"></span>Monthly report is available</a></li>
+                        <li><a class="notification-item"><span class="dot bg-warning"></span>Weekly meeting in 1 hour</a></li>
+                        <li><a class="notification-item"><span class="dot bg-success"></span>Your request has been approved</a></li>
+                        <li><a class="more">See all notifications</a></li>
+                    </ul>
+                </li>-->
+                <li class="dropdown" style="cursor: pointer">
+                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="lnr lnr-user"></i> <!--<img src="assets/img/user.png" class="img-circle" alt="Avatar">--> <span ng-bind="username"></span> <i class="icon-submenu lnr lnr-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <!--<li><a ><i class="lnr lnr-user"></i> <span>My Profile</span></a></li>-->
+                        <!--<li><a ><i class="lnr lnr-envelope"></i> <span>Message</span></a></li>-->
+                        <!--<li><a ><i class="lnr lnr-cog"></i> <span>Settings</span></a></li>-->
+                        <!-- <li ng-click="companyAct()"><a><i class="lnr lnr-briefcase"></i> <span>公司信息</span></a></li> -->
+                        <li ng-click="signout()"><a><i class="lnr lnr-exit"></i> <span>退出系统</span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- END NAVBAR -->
+<!-- LEFT SIDEBAR -->
+<div id="sidebar-nav" class="sidebar">
+    <div class="sidebar-scroll">
+        <nav>
+            <ul class="nav">
+                <li><a ui-sref="home" ui-sref-active="active" class=""><i class="lnr lnr-home"></i> <span>系统首页</span></a></li>
+                <!-- <li><a ui-sref="customer" ui-sref-active="active" class=""><i class="lnr lnr-earth"></i> <span>客户信息</span></a></li> -->
+                <li><a ui-sref="news" ng-class="{'active':state.current.name.indexOf('news') != -1}" class=""><i class="lnr lnr-leaf"></i> <span>新闻管理</span></a></li>
+                <li>
+                    <a href="/#subPages" data-toggle="collapse"
+                       ng-class="{'active':(state.current.name.indexOf('goods') != -1) || (state.current.name.indexOf('case') != -1)}" class="collapsed"><i class="lnr lnr-cart"></i> <span>物种管理</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <div id="subPages" class="collapse ">
+                        <ul class="nav">
+                            <!-- <li><a ui-sref="goods" ng-class="{'active':state.current.name.indexOf('goods') != -1}" class="">商品</a></li> -->
+                            <li><a ui-sref="species" ng-class="{'active':state.current.name.indexOf('species') != -1}" class="">物种</a></li>
+                            <!-- <li><a ui-sref="case" ng-class="{'active':state.current.name.indexOf('case') != -1}" class="">案例</a></li> -->
+                        </ul>
+                    </div>
+                </li>
+                <li><a ui-sref="website" ng-class="{'active':state.current.name.indexOf('website') != -1}" class=""><i class="lnr lnr-pencil"></i> <span>网站编辑</span></a></li>
+                <li ng-if="isAdmin"><a ui-sref="user" ui-sref-active="active" class=""><i class="lnr lnr-users"></i> <span>用户管理</span></a></li>
+                <!--<li><a class=""><i class="lnr lnr-chart-bars"></i> <span>Charts</span></a></li>
+                <li><a class=""><i class="lnr lnr-cog"></i> <span>Panels</span></a></li>
+                <li><a class=""><i class="lnr lnr-alarm"></i> <span>Notifications</span></a></li>
+                <li>
+                    <a href="/#subPages" data-toggle="collapse" class="collapsed"><i class="lnr lnr-file-empty"></i> <span>Pages</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                    <div id="subPages" class="collapse ">
+                        <ul class="nav">
+                            <li><a class="">Profile</a></li>
+                            <li><a href="page-login.html" class="">Login</a></li>
+                            <li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li><a class=""><i class="lnr lnr-dice"></i> <span>Tables</span></a></li>
+                <li><a class=""><i class="lnr lnr-text-format"></i> <span>Typography</span></a></li>
+                <li><a class=""><i class="lnr lnr-linearicons"></i> <span>Icons</span></a></li>-->
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- END LEFT SIDEBAR -->
+
+    <!-- 公司信息查看 -->
+    <div class="modal fade companyModel" id="companyModel" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header" ng-bind="c.name"></div>
+                <div class="modal-body">
+                    <div class="tab-content">
+                        <div class="tab-pane active">
+                            <ul class="list-unstyled activity-timeline">
+                                <li>
+                                    <i class="lnr lnr-apartment activity-icon"></i>
+                                    <p ng-bind="c.adds"></p>
+                                </li>
+                                <li>
+                                    <i class="lnr lnr-phone activity-icon"></i>
+                                    <p ng-bind="c.phone"></p>
+                                </li>
+                                <li>
+                                    <i class="lnr lnr-link activity-icon"></i>
+                                    <p ng-bind="c.email"></p>
+                                </li>
+                                <li>
+                                    <i class="lnr lnr-map-marker activity-icon"></i>
+                                    <p ng-bind="c.location"></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-xs btn-danger" data-dismiss="modal" ng-click="companyEditAct()">修改</button>
+                    <button class="btn btn-xs btn-primary" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 公司信息新增 -->
+    <div class="modal fade companyAddModel" id="companyAddModel" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    公司信息 (全部为必填选项)
+                </div>
+                <form onkeydown="if(event.keyCode==13)return false;" action="/admin/user/companyadd" method="post" id="companyAddId">
+                    <div class="modal-body has-error">
+                        <div class="tab-content">
+                            <style>label{width: 100%;margin-bottom: 20px;}</style>
+                            <label>名称：<input name="name" required type="text" class="form-control" autocomplete="off"></label>
+                            <label>地址：<input name="adds" required type="text" class="form-control" autocomplete="off"></label>
+                            <label>电话：<input name="phone" required type="text" class="form-control" autocomplete="off"></label>
+                            <label>邮箱：<input name="email" required type="text" class="form-control" autocomplete="off"></label>
+                            <label>坐标(<a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度选择点击查看</a>)：<input name="location" required type="text" class="form-control" autocomplete="off"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-xs btn-danger" ng-click="companyAdd()" ng-disabled="ADDCOIF">确认新增</button>
+                        <button type="reset" class="btn btn-xs btn-primary" data-dismiss="modal">放弃</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 公司信息修改 -->
+    <div class="modal fade companyEditModel" id="companyEditModel" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    公司信息 (全部为必填选项)
+                </div>
+                <form onkeydown="if(event.keyCode==13)return false;" action="/admin/user/companyedit" method="post" id="companyEditId">
+                    <div class="modal-body has-error">
+                        <div class="tab-content">
+                            <input type="hidden" name="id" ng-value="c.id">
+                            <style>label{width: 100%;margin-bottom: 20px;}</style>
+                            <label>名称：<input name="name" required type="text" class="form-control" ng-value="c.name" autocomplete="off"></label>
+                            <label>地址：<input name="adds" required type="text" class="form-control" ng-value="c.adds" autocomplete="off"></label>
+                            <label>电话：<input name="phone" required type="text" class="form-control" ng-value="c.phone" autocomplete="off"></label>
+                            <label>邮箱：<input name="email" required type="text" class="form-control" ng-value="c.email" autocomplete="off"></label>
+                            <label>坐标(<a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度选择点击查看</a>)：<input name="location" required type="text" class="form-control" ng-value="c.location" autocomplete="off"></label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-xs btn-danger" ng-click="companyEdit()" ng-disabled="EDITCOIF">确认修改</button>
+                        <button type="reset" class="btn btn-xs btn-primary" data-dismiss="modal">放弃</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alert -->
+    <div class="modal fade alerts" id="alerts" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-xs btn-primary" data-dismiss="modal">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function() {
+
+        /*-----------------------------------/
+        /*	TOP NAVIGATION AND LAYOUT
+        /*----------------------------------*/
+        $('.btn-toggle-fullwidth').on('click', function() {
+            if(!$('html').hasClass('layout-fullwidth')) {
+                $('html').addClass('layout-fullwidth');
+
+            } else {
+                $('html').removeClass('layout-fullwidth');
+                $('html').removeClass('layout-default'); // also remove default behaviour if set
+            }
+
+            $(this).find('.lnr').toggleClass('lnr-arrow-left-circle lnr-arrow-right-circle');
+
+            if($(window).innerWidth() < 1025) {
+                if(!$('html').hasClass('offcanvas-active')) {
+                    $('html').addClass('offcanvas-active');
+                } else {
+                    $('html').removeClass('offcanvas-active');
+                }
+            }
+        });
+
+        $(window).on('load', function() {
+            if($(window).innerWidth() < 1025) {
+                $('.btn-toggle-fullwidth').find('.icon-arrows')
+                    .removeClass('icon-arrows-move-left')
+                    .addClass('icon-arrows-move-right');
+            }
+
+            // adjust right sidebar top position
+            $('.right-sidebar').css('top', $('.navbar').innerHeight());
+
+            // if page has content-menu, set top padding of main-content
+            if($('.has-content-menu').length > 0) {
+                $('.navbar + .main-content').css('padding-top', $('.navbar').innerHeight());
+            }
+
+            // for shorter main content
+            if($('.main').height() < $('#sidebar-nav').height()) {
+                $('.main').css('min-height', $('#sidebar-nav').height());
+            }
+        });
+
+
+        /*-----------------------------------/
+        /*	SIDEBAR NAVIGATION
+        /*----------------------------------*/
+
+        var flag=false;
+        $('.sidebar a[data-toggle="collapse"]').on('click', function() {
+            if($(this).hasClass('collapsed')) {
+                // $(this).addClass('active');
+            } else {
+                // $(this).removeClass('active');
+            }
+            flag=!flag;
+            if(flag){
+                $(this).children('.icon-submenu').css({'transform':'rotate(-90deg)'});
+            }else{
+                $(this).children('.icon-submenu').css({'transform':'rotate(0deg)'});
+            }
+        });
+
+        if( $('.sidebar-scroll').length > 0 ) {
+            $('.sidebar-scroll').slimScroll({
+                height: '95%',
+                wheelStep: 2,
+            });
+        }
+
+
+        /*-----------------------------------/
+        /*	PANEL FUNCTIONS
+        /*----------------------------------*/
+
+        // panel remove
+        $('.panel .btn-remove').click(function(e){
+
+            e.preventDefault();
+            $(this).parents('.panel').fadeOut(300, function(){
+                $(this).remove();
+            });
+        });
+
+        // panel collapse/expand
+        var affectedElement = $('.panel-body');
+
+        /*$('.panel .btn-toggle-collapse').clickToggle(
+            function(e) {
+                e.preventDefault();
+
+                // if has scroll
+                if( $(this).parents('.panel').find('.slimScrollDiv').length > 0 ) {
+                    affectedElement = $('.slimScrollDiv');
+                }
+
+                $(this).parents('.panel').find(affectedElement).slideUp(300);
+                $(this).find('i.lnr-chevron-up').toggleClass('lnr-chevron-down');
+            },
+            function(e) {
+                e.preventDefault();
+
+                // if has scroll
+                if( $(this).parents('.panel').find('.slimScrollDiv').length > 0 ) {
+                    affectedElement = $('.slimScrollDiv');
+                }
+
+                $(this).parents('.panel').find(affectedElement).slideDown(300);
+                $(this).find('i.lnr-chevron-up').toggleClass('lnr-chevron-down');
+            }
+        );*/
+
+
+        /*-----------------------------------/
+        /*	PANEL SCROLLING
+        /*----------------------------------*/
+
+        if( $('.panel-scrolling').length > 0) {
+            $('.panel-scrolling .panel-body').slimScroll({
+                height: '430px',
+                wheelStep: 2,
+            });
+        }
+
+        if( $('#panel-scrolling-demo').length > 0) {
+            $('#panel-scrolling-demo .panel-body').slimScroll({
+                height: '175px',
+                wheelStep: 2,
+            });
+        }
+
+        /*-----------------------------------/
+        /*	TODO LIST
+        /*----------------------------------*/
+
+        $('.todo-list input').change( function() {
+            if( $(this).prop('checked') ) {
+                $(this).parents('li').addClass('completed');
+            }else {
+                $(this).parents('li').removeClass('completed');
+            }
+        });
+
+
+        /*-----------------------------------/
+        /* TOASTR NOTIFICATION
+        /*----------------------------------*/
+
+        if($('#toastr-demo').length > 0) {
+            toastr.options.timeOut = "false";
+            toastr.options.closeButton = true;
+            toastr['info']('Hi there, this is notification demo with HTML support. So, you can add HTML elements like <a href="#">this link</a>');
+
+            $('.btn-toastr').on('click', function() {
+                $context = $(this).data('context');
+                $message = $(this).data('message');
+                $position = $(this).data('position');
+
+                if($context == '') {
+                    $context = 'info';
+                }
+
+                if($position == '') {
+                    $positionClass = 'toast-left-top';
+                } else {
+                    $positionClass = 'toast-' + $position;
+                }
+
+                toastr.remove();
+                toastr[$context]($message, '' , { positionClass: $positionClass });
+            });
+
+            $('#toastr-callback1').on('click', function() {
+                $message = $(this).data('message');
+
+                toastr.options = {
+                    "timeOut": "300",
+                    "onShown": function() { alert('onShown callback'); },
+                    "onHidden": function() { alert('onHidden callback'); }
+                }
+
+                toastr['info']($message);
+            });
+
+            $('#toastr-callback2').on('click', function() {
+                $message = $(this).data('message');
+
+                toastr.options = {
+                    "timeOut": "10000",
+                    "onclick": function() { alert('onclick callback'); },
+                }
+
+                toastr['info']($message);
+
+            });
+
+            $('#toastr-callback3').on('click', function() {
+                $message = $(this).data('message');
+
+                toastr.options = {
+                    "timeOut": "10000",
+                    "closeButton": true,
+                    "onCloseClick": function() { alert('onCloseClick callback'); }
+                }
+
+                toastr['info']($message);
+            });
+        }
+    });
+
+    // toggle function
+    /*$.fn.clickToggle = function( f1, f2 ) {
+        return this.each( function() {
+            var clicked = false;
+            $(this).bind('click', function() {
+                if(clicked) {
+                    clicked = false;
+                    return f2.apply(this, arguments);
+                }
+
+                clicked = true;
+                return f1.apply(this, arguments);
+            });
+        });
+
+    }*/
+
+
+
+</script>

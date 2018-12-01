@@ -1,0 +1,67 @@
+用户user：
+主键	Id			int ;
+用户名	Username	char(10) ;
+密码	Password		varchar(50) ;
+电话	tel		char(11) ;
+权限	Roles		varchar(100) ;
+
+类目category：
+主键		Id		int ;
+类名		cname	varchar(20) ;
+
+子类目 subcategory：
+主键		id		int ;
+类名		sname	varchar(20) ;
+父类外键	parent_id		int ;
+
+商品 goods：
+主键	id	int ;
+商品名	goods_name	varchar(20) ;
+商品添加时间	goods_time	int ;
+卖点	goods_point	varchar(80) ;
+图片	goods_pic	varchar(300) ;
+产品概述	goods_summary	varchar(500) ;
+热门商品	nice		tinyint(1) ;
+上下架 state      tinyint(1) ;
+商品类型 i  tinyint(1) ;
+类目外键	sid	int ;
+
+新闻 news：
+主键	id		int ;
+标题	title		varchar(40) ;
+时间	time		int ;
+内容	content 	text ;
+类目外键	sid	int ;
+发布人外键 uid   int ;
+发布状态	state	tinyint(1) ;
+
+客户留言 customer：
+主键	id	int ;
+客户姓名	name	varchar(7) ;
+客户邮箱	email	varchar(40) ;
+客户电话	phone	char(11) ;
+客户留言	content	varchar(150) ;
+联系状态	reply	tinyint(1) ;
+添加时间	time	int ;
+
+公司信息 company：
+主键	id	int ;
+名称	name		varchar(50) ;
+地址	adds		varchar(100) ;
+电话	phone	varchar(100) ;
+邮箱	email	varchar(100) ;
+位置	location	varchar(100) ;
+
+网站信息 websiteinfo
+主键	id	int ;
+logo图片	logo	varchar(300) ;
+品牌介绍	brand	varchar(500) ;
+活动图片	salse	varchar(300) ;
+轮播信息	adinfo	varchar(1000) ;
+轮播图片	adpics	varchar(300) ;
+
+网站修改日志 websitelog
+主键	id	   int ;
+用户 uid    int ;
+修改内容 info   varchar(100);
+修改时间 time   int ;

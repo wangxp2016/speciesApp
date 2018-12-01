@@ -1,0 +1,199 @@
+<div class="main">
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+        <div class="container-fluid">
+            <!-- OVERVIEW -->
+            <div class="panel panel-headline">
+                <div class="panel-heading">
+                    <h3 class="panel-title">网站编辑</h3>
+                    <p class="panel-subtitle">website management</p>
+                </div>
+                <div class="panel-body">
+                    <div class="">
+                        <!-- AWARDS -->
+                        <div class="awards">
+                            <div class="row">
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="award-item" data-toggle="modal" data-target=".webLogoModel">
+                                        <div class="hexagon">
+                                            <span class="lnr lnr-sun award-icon"></span>
+                                        </div>
+                                        <span>网站logo</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="award-item" data-toggle="modal" data-target=".webAdModel">
+                                        <div class="hexagon">
+                                            <span class="lnr lnr-smile award-icon"></span>
+                                        </div>
+                                        <span>轮播展示</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="award-item" data-toggle="modal" data-target=".webBrandModel" ng-click="brandInfoQuery()">
+                                        <div class="hexagon">
+                                            <span class="lnr lnr-magic-wand award-icon"></span>
+                                        </div>
+                                        <span>品牌介绍</span>
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-6">
+                                    <div class="award-item" data-toggle="modal" data-target=".webSalesModel">
+                                        <div class="hexagon">
+                                            <span class="lnr lnr-volume-medium award-icon"></span>
+                                        </div>
+                                        <span>活动宣传</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END AWARDS -->
+                        <!-- TABBED CONTENT -->
+                        <div class="custom-tabs-line tabs-line-bottom left-aligned">
+                            <ul class="nav" role="tablist">
+                                <li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">日志信息</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade in active" id="tab-bottom-left1">
+                                <ul class="list-unstyled activity-timeline">
+                                    <li ng-repeat="l in logList">
+                                        <i class="lnr lnr-history activity-icon"></i>
+                                        <p><span ng-bind="l.roles"></span> <a><span ng-bind="l.username"></span></a> <span ng-bind="l.info"></span> <span class="timestamp" ng-bind="l.time"></span></p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- END TABBED CONTENT -->
+                    </div>
+                </div>
+            </div>
+            <!-- END OVERVIEW -->
+        </div>
+    </div>
+    <!-- END MAIN CONTENT -->
+
+    <!-- 网站logo编辑 -->
+    <div class="modal fade webLogoModel" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">网站logo编辑(要求: 宽136px,高59px)</div>
+                <form onkeydown="if(event.keyCode==13)return false;" action="/admin/website/websiteup" method="post" id="logoEditId" enctype="multipart/form-data">
+                    <input type="hidden" name="i" value="1">
+                    <div class="modal-body">
+                        <input type="file" name="logo" id="selectWebPic1" accept="image/*" style="display: none;">
+                        <div class="webLogoPic" ng-click="selectWebPicId1()">
+                            <p>选择图片上传</p>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-xs btn-danger" id="logoSubmitBtnId" ng-disabled="EDITUPIF">确认修改</button>
+                        <button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 网站轮播图编辑 -->
+    <div class="modal fade webAdModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document" style="width: 70%">
+            <div class="modal-content">
+                <div class="modal-header">网站轮播图编辑(要求: 宽1920px,高896px)</div>
+                <form onkeydown="if(event.keyCode==13)return false;" action="/admin/website/websiteup" method="post" id="adEditId" enctype="multipart/form-data">
+                    <input type="hidden" name="i" value="4">
+                    <div class="modal-body">
+                        <ul id="webADItem">
+                            <li>
+                                <input type="file" name="ad" accept="image/*" style="display: none;">
+                                <div class="webADItemBtn webAdPic" style="background-image: url('{{adItem[0].pic}}')"><p>选择图片</p></div>
+                                <input value="{{adItem[0].title}}" name="title" placeholder="轮播广告标题" class="form-control">
+                                <input value="{{adItem[0].info}}" name="info" placeholder="轮播广告描述" class="form-control webADItemInfo">
+                                <input value="{{adItem[0].href}}" name="href" placeholder="跳转地址" class="form-control webADItemUrl">
+                            </li>
+                            <li>
+                                <input type="file" name="ad" accept="image/*" style="display: none;">
+                                <div class="webADItemBtn webAdPic" style="background-image: url('{{adItem[1].pic}}')"><p>选择图片</p></div>
+                                <input value="{{adItem[1].title}}" name="title" placeholder="轮播广告标题" class="form-control">
+                                <input value="{{adItem[1].info}}" name="info" placeholder="轮播广告描述" class="form-control webADItemInfo">
+                                <input value="{{adItem[1].href}}" name="href" placeholder="跳转地址" class="form-control webADItemUrl">
+                            </li>
+                            <li>
+                                <input type="file" name="ad" accept="image/*" style="display: none;">
+                                <div class="webADItemBtn webAdPic" style="background-image: url('{{adItem[2].pic}}')"><p>选择图片</p></div>
+                                <input value="{{adItem[2].title}}" name="title" placeholder="轮播广告标题" class="form-control">
+                                <input value="{{adItem[2].info}}" name="info" placeholder="轮播广告描述" class="form-control webADItemInfo">
+                                <input value="{{adItem[2].href}}" name="href" placeholder="跳转地址" class="form-control webADItemUrl">
+                            </li>
+                            <li>
+                                <input type="file" name="ad" accept="image/*" style="display: none;">
+                                <div class="webADItemBtn webAdPic" style="background-image: url('{{adItem[3].pic}}')"><p>选择图片</p></div>
+                                <input value="{{adItem[3].title}}" name="title" placeholder="轮播广告标题" class="form-control">
+                                <input value="{{adItem[3].info}}" name="info" placeholder="轮播广告描述" class="form-control webADItemInfo">
+                                <input value="{{adItem[3].href}}" name="href" placeholder="跳转地址" class="form-control webADItemUrl">
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-xs btn-danger" id="adSubmitBtnId" ng-disabled="EDITUPIF">确认修改</button>
+                        <button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 品牌介绍编辑 -->
+    <div class="modal fade webBrandModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">品牌介绍编辑</div>
+                <form onkeydown="if(event.keyCode==13)return false;" action="/admin/website/websiteup" method="post" id="brandEditId" enctype="multipart/form-data">
+                    <input type="hidden" name="i" value="2">
+                    <div class="modal-body">
+                        <label>公司品牌介绍：</label>
+                        <textarea name="brandInfo" cols="30" rows="5" class="form-control" ng-model="brandInfoModel"></textarea>
+                        <label style="margin-top: 30px;">商品项目介绍：</label>
+                        <textarea name="goodsInfo" cols="30" rows="5" class="form-control" ng-model="goodsInfoModel"></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-xs btn-danger" ng-click="brandEdit()" ng-disabled="!brandInfoModel || !goodsInfoModel">确认修改</button>
+                        <button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- 网站宣传活动编辑 -->
+    <div class="modal fade webSalesModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">网站宣传活动编辑(要求: 宽404px,高303px)</div>
+                <form onkeydown="if(event.keyCode==13)return false;" action="/admin/website/websiteup" method="post" id="salesEditId" enctype="multipart/form-data">
+                    <input type="hidden" name="i" value="3">
+                    <div class="modal-body">
+                        <input type="file" name="sales" id="selectWebPicId2" accept="image/*" style="display: none;">
+                        <input type="file" name="sales" id="selectWebPicId3" accept="image/*" style="display: none;">
+                        <input type="file" name="sales" id="selectWebPicId4" accept="image/*" style="display: none;">
+                        <div class="webSalesPic" style="display: inline-block;margin-right: 20px;"><p>选择图片上传</p></div>
+                        <div class="webSalesPic" style="display: inline-block;margin-right: 20px;"><p>选择图片上传</p></div>
+                        <div class="webSalesPic" style="display: inline-block;margin-right: 20px;"><p>选择图片上传</p></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-xs btn-danger" id="salesSubmitBtnId" ng-disabled="EDITUPIF">确认修改</button>
+                        <button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">关闭</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Alert -->
+    <div class="modal fade" id="webAlerts" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="Tip()">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html ng-app="app" class="fullscreen-bg">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+		<title class="CopyrightId"></title>
+		<link rel="icon" href="img/xs.ico" type="image/x-icon"/>
+		<link href="lib/bootstrap/bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="lib/bootstrap/bootstrap-reset.css">
+		<link href="lib/bootstrap/font-awesome.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="lib/bootstrap/bootstrap-datetimepicker.min.css">
+		<link href="lib/bootstrap/magnific-popup.min.css" rel="stylesheet">
+		<link href="lib/bootstrap/select2.min.css" rel="stylesheet">
+		<link rel="stylesheet" href="lib/bootstrap/fonts.css">
+		<link rel="stylesheet" href="css/animations.css">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!--<link rel="stylesheet" href="css/animations.css">-->
+	</head>
+	<body id="wrapper">
+		<div ng-include="'tpl/commons/nav.html'" ng-if="navScope"></div>
+		<div ui-view="view" class="view-animations" id="uiviews"></div>
+		<script src="lib/jquery/jquery.min.js"></script>
+		<script src="lib/jquery/jquery.scrollTo.min.js"></script>
+		<script src="lib/jquery/jquery.nicescroll.min.js"></script>
+		<script src="lib/jquery/jquery.magnific-popup.min.js"></script>
+		<script src="lib/jquery/jquery.slimscroll.min.js"></script>
+		<script src="lib/jquery/select2.js"></script>
+		<script src="lib/jquery/pinyin.js"></script>
+		<script src="lib/jquery/jquery.form.min.js"></script>
+		<script src="http://cdn.bootcss.com/ckeditor/4.7.1/ckeditor.js"></script>
+		<script src="lib/jquery/bootstrap.min.js"></script>
+		<script src="lib/bootstrap/bootstrap-datetimepicker.min.js"></script>
+		<script src="lib/bootstrap/bootstrap-datepicker.zh-CN.js"></script>
+		<script src="lib/jquery/angular.min.js"></script>
+		<script src="lib/jquery/angular-cookies.min.js"></script>
+		<script src="lib/jquery/angular-ui-router.min.js"></script>
+		<script src="lib/jquery/angular-animate.min.js"></script>
+		<script src="lib/jquery/angular-sanitize.min.js"></script>
+		<script src="js/app.js"></script>
+		<!-- 特殊接口配置文件 -->
+		<script src="js/config.js"></script>
+		<!-- 公共模块 -->
+		<script src="js/controller/CommonModule/commonNav.js"></script>
+		<!-- 主页模块 -->
+		<script src="js/controller/HomeModule/homeModule.js"></script>
+		<!-- 客户模块 -->
+		<script src="js/controller/CustomerModule/customerModule.js"></script>
+		<!-- 用户模块 -->
+		<script src="js/controller/UserModule/userModule.js"></script>
+		<!-- 新闻模块 -->
+		<script src="js/controller/NewsModule/newsModule.js"></script>
+		<script src="js/controller/NewsModule/newsAddModule.js"></script>
+		<script src="js/controller/NewsModule/newsEditModule.js"></script>
+		<!-- 商品管理模块 -->
+		<script src="js/controller/GoodsManageModule/goodsModule.js"></script>
+		<script src="js/controller/GoodsManageModule/goodsAddModel.js"></script>
+		<script src="js/controller/GoodsManageModule/goodsEditModule.js"></script>
+		<script src="js/controller/GoodsManageModule/caseModule.js"></script>
+		<script src="js/controller/GoodsManageModule/caseAddModel.js"></script>
+		<script src="js/controller/GoodsManageModule/caseEditModule.js"></script>
+		<!-- 物种管理模块 -->
+		<script src="js/controller/speciesManageModule/speciesModule.js"></script>
+		<script src="js/controller/speciesManageModule/speciesAddModel.js"></script>
+		<script src="js/controller/speciesManageModule/speciesEditModule.js"></script>
+		<!-- 网站编辑模块 -->
+		<script src="js/controller/websiteModule/websiteModule.js"></script>
+		<!-- 指令 -->
+		<script src="js/directives.js"></script>
+		<!-- 服务 -->
+		<script src="js/services.js"></script>
+		<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=ZtWL7jXYA7XcIAIebUWxhYL4wZ3A0sgw"></script>
+		<script>
+            // 公司信息
+            $.get("/common/company", function(res){
+                $('.CopyrightId').text(res.name);
+            })
+		</script>
+	</body>
+</html>
