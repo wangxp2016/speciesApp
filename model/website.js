@@ -13,8 +13,8 @@ module.exports={
     },
 
     // 品牌介绍编辑操作
-    bradnEdit(brand='',goods=''){
-        return sql.query(`UPDATE websiteinfo SET brand='{"brandInfo":"${brand.trim()}","goodsInfo":"${goods.trim()}"}';`);
+    bradnEdit(brand='',species=''){
+        return sql.query(`UPDATE websiteinfo SET brand='{"brandInfo":"${brand.trim()}","speciesInfo":"${species.trim()}"}';`);
     },
 
     // 轮播图信息编辑操作

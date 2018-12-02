@@ -54,7 +54,7 @@ $('.hero-slider').owlCarousel({
     loop: true,
     animateOut: 'fadeOut',
     animateIn: 'fadeIn',
-    autoplay: false,
+    autoplay: true,
     navText: ['prev', 'next'],
     responsive: {
         0: {

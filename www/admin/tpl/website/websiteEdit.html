@@ -145,17 +145,17 @@
     <div class="modal fade webBrandModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" data-keyboard="false">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">品牌介绍编辑</div>
+                <div class="modal-header">实验室以及网站介绍</div>
                 <form onkeydown="if(event.keyCode==13)return false;" action="/admin/website/websiteup" method="post" id="brandEditId" enctype="multipart/form-data">
                     <input type="hidden" name="i" value="2">
                     <div class="modal-body">
-                        <label>公司品牌介绍：</label>
+                        <label>实验室介绍：</label>
                         <textarea name="brandInfo" cols="30" rows="5" class="form-control" ng-model="brandInfoModel"></textarea>
-                        <label style="margin-top: 30px;">商品项目介绍：</label>
-                        <textarea name="goodsInfo" cols="30" rows="5" class="form-control" ng-model="goodsInfoModel"></textarea>
+                        <label style="margin-top: 30px;">网站介绍：</label>
+                        <textarea name="speciesInfo" cols="30" rows="5" class="form-control" ng-model="speciesInfoModel"></textarea>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-xs btn-danger" ng-click="brandEdit()" ng-disabled="!brandInfoModel || !goodsInfoModel">确认修改</button>
+                        <button type="submit" class="btn btn-xs btn-danger" ng-click="brandEdit()" ng-disabled="!brandInfoModel || !speciesInfoModel">确认修改</button>
                         <button type="button" class="btn btn-xs btn-primary" data-dismiss="modal">关闭</button>
                     </div>
                 </form>

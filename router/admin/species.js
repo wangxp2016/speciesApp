@@ -117,7 +117,7 @@ router
                 morphologySite = upload.fileUpdate(ctx, 'morphology_img', morphologyList, 'morphology_img'); // 修改图片路径
             }
             let speciesTime = moment().unix();
-            let keyWord =  species.species.substring(0,1),
+            let keyWord =  species.species.substring(0,1);
             const data = await speciesModel.speciesEdit(
                 species.id,
                 species.order,

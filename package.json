@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js"
   },
-  "author": "liangjingxuan",
+  "author": "",
   "license": "ISC",
   "devDependencies": {
     "co-mysql": "^1.0.0",

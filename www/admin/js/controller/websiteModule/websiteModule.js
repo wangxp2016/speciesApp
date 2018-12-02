@@ -16,7 +16,7 @@ angular.module('app')
                 // 品牌介绍信息查询
                 $scope.brandScope=JSON.parse(data.brand);
                 $scope.brandInfoModel=$scope.brandScope.brandInfo;
-                $scope.goodsInfoModel=$scope.brandScope.goodsInfo;
+                $scope.speciesInfoModel=$scope.brandScope.speciesInfo;
 
                 // 活动图片路径查询
                 var sales = data.sales.split(','),

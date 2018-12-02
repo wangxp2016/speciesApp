@@ -35,7 +35,7 @@ router
                 // 品牌介绍编辑操作
                 case 2 :
                 {
-                    data=await websiteModel.bradnEdit(params.brandInfo,params.goodsInfo);
+                    data=await websiteModel.bradnEdit(params.brandInfo,params.speciesInfo);
                     logInfo='编辑了网站品牌介绍信息。';
                 }
                     break;
