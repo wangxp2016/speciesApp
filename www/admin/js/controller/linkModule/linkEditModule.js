@@ -16,23 +16,11 @@ angular.module('app')
             }).success(function (data) {
                 G.expire(data);
                 $scope.link = data;
-                console.log("data.fileList", data.fileList);
-                $scope.fileList = data.fileList;
-                // 地理分布图片展示
-                $scope.distribution_img = $scope.link.distribution_img;
-                if ($scope.distribution_img) {
-                    $scope.distribution_img = $scope.distribution_img.split(',');
-                }
-                // 形态图展示
-                $scope.morphology_img = $scope.link.morphology_img;
-                if ($scope.morphology_img) {
-                    $scope.morphology_img = $scope.morphology_img.split(',');
-                }
-                // 地理分布图片展示
-                $scope.removedistributionPic = function (path) {
-                    console.log("删除地理分布图片展示");
+                $scope.link_img = $scope.link.images;
+                $scope.type = $scope.link.type;
+                $scope.removelinkPic = function (path) {
                     $scope.del = function () {
-                        $http.get('/admin/link/distributionPicDel', {
+                        $http.get('/admin/link/linkPicDel', {
                             params: {
                                 id: $stateParams.id,
                                 path: path
@@ -42,41 +30,15 @@ angular.module('app')
                             $('#alerts .modal-body').text(data.msg);
                             $('#alerts').modal('show');
                             if (data.i) {
-                                $scope.Tip = function () {
-                                    // 更新数据
-                                    setTimeout(function () {
-                                        location.reload()
-                                    }, 500)
-                                }
+                                // 更新数据
+                                setTimeout(function () {
+                                    location.reload()
+                                }, 500)
                             }
                         });
                     };
                 };
 
-                // 形态图展示
-                $scope.removemorphologyPic = function (path) {
-                    console.log("删除形态图展示");
-                    $scope.del = function () {
-                        $http.get('/admin/link/morphologyPicDel', {
-                            params: {
-                                id: $stateParams.id,
-                                path: path
-                            }
-                        }).success(function (data) {
-                            $('.confirms').modal('hide');
-                            $('#alerts .modal-body').text(data.msg);
-                            $('#alerts').modal('show');
-                            if (data.i) {
-                                $scope.Tip = function () {
-                                    // 更新数据
-                                    setTimeout(function () {
-                                        location.reload()
-                                    }, 500)
-                                }
-                            }
-                        });
-                    };
-                };
 
                 // 修改物种
                 $scope.linkEdit = function () {
@@ -90,12 +52,9 @@ angular.module('app')
                             $('#alerts .modal-body').text(data.msg);
                             $('#alerts').modal('show');
                             if (data.i) {
-                                $scope.Tip = function () {
-                                    // 跳转到列表
-                                    setTimeout(function () {
-                                        $state.go('link')
-                                    }, 500);
-                                }
+                                setTimeout(function () {
+                                    $state.go('link')
+                                }, 500);
                             }
                         }
                     });

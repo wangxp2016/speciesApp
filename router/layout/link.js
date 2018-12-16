@@ -16,11 +16,9 @@ router
 
         const link = await linkModel.linkList(page, pagesize);
         var linkList = await link.list;
-        console.log("linkList", linkList);
         let websites = [];
         let researchers = [];
         for (let link of linkList) {
-            console.log("linkList", link);
             if (link.type == 'researchers') {
                 researchers.push(link)
             } else {

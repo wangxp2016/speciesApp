@@ -34,6 +34,17 @@
         margin: 0;
         float: left;
     }
+    .m-grouping .tit li {
+        width: auto;
+        height: auto;
+        text-align: left;
+        float: inherit;
+    }
+    .breadcrumb>li+li:before {
+        padding: 0 5px;
+        color: #ccc;
+        content: "/\00a0";
+    } 
 </style>
 
 <body>
@@ -68,66 +79,38 @@
                 <div style="margin-bottom: 50px;">
                     <ul class="nav dec-and-review-menu">
                         <li>
-                            <a class="active" data-toggle="tab" href="#">物种信息</a>
+                            <a class="active" data-toggle="tab" href="#">
+                                <%=speciesDetail.species%></a>
                         </li>
                     </ul>
                 </div>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="basic-info cmn-clearfix">
-                            <dl class="basicInfo-block basicInfo-left">
-                                <dt class="basicInfo-item name">Kingdom</dt>
-                                <dd class="basicInfo-item value">
-                                    Animalia
-                                </dd>
-                                <dt class="basicInfo-item name">Phylum</dt>
-                                <dd class="basicInfo-item value">
-                                    Euarthropoda
-                                </dd>
-                                <dt class="basicInfo-item name">Subphylum</dt>
-                                <dd class="basicInfo-item value">
-                                    Hexapoda
-                                </dd>
-                                <dt class="basicInfo-item name">Class</dt>
-                                <dd class="basicInfo-item value">
-                                    Insecta
-                                </dd>
-                                <dt class="basicInfo-item name">Subclass</dt>
-                                <dd class="basicInfo-item value">
-                                    Pterygota
-                                </dd>
-                                <dt class="basicInfo-item name">order</dt>
-                                <dd class="basicInfo-item value">
+                        <div>
+                            <ol class="breadcrumb " style="margin-bottom: 0px;padding:0px;background-color:#fff;"><span
+                                    class="glyphicon glyphicon-tree-deciduous" style="color:#9d9d9d;" title="分类地位"></span>
+                                <li>
                                     <%=speciesDetail.order_m%>
-                                </dd>
-                            </dl>
-                            <dl class="basicInfo-block basicInfo-right">
-
-                                <dt class="basicInfo-item name">suborder</dt>
-                                <dd class="basicInfo-item value">
+                                </li>
+                                <li>
                                     <%=speciesDetail.suborder%>
-                                </dd>
-                                <dt class="basicInfo-item name">superfamily</dt>
-                                <dd class="basicInfo-item value">
+                                </li>
+                                <li>
                                     <%=speciesDetail.superfamily%>
-                                </dd>
-                                <dt class="basicInfo-item name">family</dt>
-                                <dd class="basicInfo-item value">
+                                </li>
+                                <li>
                                     <%=speciesDetail.family%>
-                                </dd>
-                                <dt class="basicInfo-item name">subfamily</dt>
-                                <dd class="basicInfo-item value">
+                                </li>
+                                <li>
                                     <%=speciesDetail.subfamily%>
-                                </dd>
-                                <dt class="basicInfo-item name">genus</dt>
-                                <dd class="basicInfo-item value">
+                                </li>
+                                <li>
                                     <%=speciesDetail.genus%>
-                                </dd>
-                                <dt class="basicInfo-item name">species</dt>
-                                <dd class="basicInfo-item value">
+                                </li>
+                                <li class="active fenlei" style="color:#aaa;">
                                     <%=speciesDetail.species%>
-                                </dd>
-                            </dl>
+                                </li>
+                            </ol>
                         </div>
                     </div>
                 </div>
@@ -197,102 +180,122 @@
                     <div class="col-md-12">
                         <div class="product-review-tab">
                             <h2 class="title-text" style="margin-bottom: 20px;">体型特征</h2>
-                            <div class="basic-info cmn-clearfix">
-                                <dl class="basicInfo-block basicInfo-left">
-                                    <dt class="basicInfo-item name">体色</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.body_color%>
-                                    </dd>
-                                    <dt class="basicInfo-item name"><i style="font-size:20px" class="fa">&#xf222</i> 雄体长</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.body_length_male%>
-                                    </dd>
-                                    <dt class="basicInfo-item name"><i style="font-size:20px" class="fa">&#xf222</i> 雄前翅长</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.forewing_length_male%>
-                                    </dd>
-                                    <dt class="basicInfo-item name"><i style="font-size:20px" class="fa">&#xf222</i> 雄后足股节长</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.hindFemur_length_male%>
-                                    </dd>
-                                    <dt class="basicInfo-item name"><i style="font-size:20px" class="fa">&#xf222</i> 雄前胸背板长</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.pronotum_length_male%>
-                                    </dd>
-                                </dl>
-                                <dl class="basicInfo-block basicInfo-right">
-
-                                    <dt class="basicInfo-item name"> </dt>
-                                    <dd class="basicInfo-item value">
-                                    </dd>
-                                    <dt class="basicInfo-item name"><i style="font-size:20px" class="fa">&#xf221</i> 雌体长</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.body_length_female%>
-                                    </dd>
-                                    <dt class="basicInfo-item name"><i style="font-size:20px" class="fa">&#xf221</i> 雌前翅长</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.forewing_length_female%>
-                                    </dd>
-                                    <dt class="basicInfo-item name"><i style="font-size:20px" class="fa">&#xf221</i> 雌后足股节长</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.hindFemur_length_female%>
-                                    </dd>
-                                    <dt class="basicInfo-item name"><i style="font-size:20px" class="fa">&#xf221</i> 雌前胸背板长</dt>
-                                    <dd class="basicInfo-item value">
-                                        <%=speciesDetail.pronotum_length_female%>
-                                    </dd>
-                                </dl>
-                            </div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>体色</th>
+                                        <th>体长</th>
+                                        <th>前翅长</th>
+                                        <th>后足股节长</th>
+                                        <th>前胸背板长</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><i style="font-size:20px" class="fa">&#xf222</i></td>
+                                        <td>
+                                            <%=speciesDetail.body_color%>
+                                        </td>
+                                        <td>
+                                            <%=speciesDetail.body_length_male%>
+                                        </td>
+                                        <td>
+                                            <%=speciesDetail.forewing_length_male%>
+                                        </td>
+                                        <td>
+                                            <%=speciesDetail.hindFemur_length_male%>
+                                        </td>
+                                        <td>
+                                            <%=speciesDetail.pronotum_length_male%>
+                                        </td>
+                                    </tr>
+                                    <tr class="success">
+                                        <td><i style="font-size:20px" class="fa">&#xf221</i></td>
+                                        <td>
+                                            <%=speciesDetail.body_color%>
+                                        </td>
+                                        <td>
+                                            <%=speciesDetail.body_length_female%>
+                                        </td>
+                                        <td>
+                                            <%=speciesDetail.forewing_length_female%>
+                                        </td>
+                                        <td>
+                                            <%=speciesDetail.hindFemur_length_female%>
+                                        </td>
+                                        <td>
+                                            <%=speciesDetail.pronotum_length_female%>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                    <hr style="margin: 30px 0;">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <label class="control-label">
-                                参看文献:
-                            </label>
-                            <span>
-                                <%=speciesDetail.literature%></span>
-                            <br>
-                            <label class="control-label">
-                                备注:
-                            </label>
-                            <span>
-                                <%=speciesDetail.remark%></span>
-                            <br>
-                            <label class="control-label">
-                                附件下载:
-                            </label>
-                            <div id="main" style="min-height: 10px">
-                                <ul id="browser" class="filetree">
-                                    <li><span class="folder">
-                                            <%=speciesDetail.species%></span>
-                                        <ul>
-                                            <% let fileList = speciesDetail.fileList %>
-                                            <% for(let i=0,len=fileList.length;i<len;i++){ %>
-                                            <li class="closed"><span class="folder">
-                                                    <%=fileList[i].name%></span>
-                                                <ul id=<%=fileList[i].name%>>
-                                                    <% let speciesFile = fileList[i].children %>
-                                                    <% for(let j=0,len=speciesFile.length;j<len;j++){ %>
-                                                    <li> <img src="layout/img/icon/Package.png" style="width: 20px;height: 20px"
-                                                            alt="">
-                                                        <a href="<%=speciesFile[j].value.replace('www','')%>">
-                                                            <%=speciesFile[j].name%></a></li>
-                                                    <%}%>
-                                                </ul>
-                                            </li>
-                                            <%}%>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                </div>
+                <hr style="margin: 30px 0;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title-text" style="margin-bottom: 20px;">参考文献</h2>
+                        <ul style="margin-left: 20px;">
+                            <% let literatures = speciesDetail.literature.split("||") %>
+                            <% for(let j=0,len=literatures.length;j<len;j++){ %>
+                            <li><span>
+                                    <%=literatures[j]%></span> </li>
+                            <%}%>
+                        </ul>
+                    </div>
+                </div>
+                <hr style="margin: 30px 0;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <label class="control-label">
+                            link:
+                        </label>
+                        <span>
+                            <%=speciesDetail.remark%></span>
+                        <br>
+                        <label class="control-label">
+                            附件下载:
+                        </label>
+                        <div id="main" style="min-height: 10px">
+                            <ul id="browser" class="filetree">
+                                <li><span class="folder">
+                                        <%=speciesDetail.species%></span>
+                                    <ul>
+                                        <% let fileList = speciesDetail.fileList %>
+                                        <% for(let i=0,len=fileList.length;i<len;i++){ %>
+                                        <li class="closed"><span class="folder">
+                                                <%=fileList[i].name%></span>
+                                            <ul id=<%=fileList[i].name%>>
+                                                <% let speciesFolder = fileList[i].children %>
+                                                <% for(let j=0,len=speciesFolder.length;j<len;j++){ %>
+                                                <li class="closed"><span class="folder">
+                                                        <%=speciesFolder[j].name%></span>
+                                                    <ul id=<%=speciesFolder[j].name%>>
+                                                        <% let speciesFile = speciesFolder[j].children %>
+                                                        <% for(let k=0,len=speciesFile.length;k<len;k++){ %>
+                                                        <li> <img src="layout/img/icon/Package.png" style="width: 20px;height: 20px"
+                                                                alt="">
+                                                            <a href="<%=speciesFile[j].value.replace('www','')%>">
+                                                                <%=speciesFile[k].name%></a></li>
+                                                        <%}%>
+                                                    </ul>
+                                                </li>
+                                                <%}%>
+                                            </ul>
+                                        </li>
+                                        <%}%>
+                                    </ul>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <% include footer.ejs %>
+    </div>
+    <% include footer.ejs %>
     </div>
     <% include script.ejs %>
     <script type="text/javascript">

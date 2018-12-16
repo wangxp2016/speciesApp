@@ -41,11 +41,22 @@ function geFileList(path) {
     readFile(path, filesList, targetObj);
     return filesList;
 }
+
+function mkdirSync(dirpath) {
+    if (!fs.existsSync(paths.dirname(dirpath))) {
+        mkdirSync(paths.dirname(dirpath));
+    }
+    fs.mkdirSync(dirpath);
+}
+
 //遍历读取文件 
 function readFile(path, filesList, targetObj) {
     let isExists = fs.existsSync(path);
     if (!isExists) {
-        fs.mkdirSync(path);
+        mkdirSync(path + '/EST/1');
+        mkdirSync(path + '/mitogenome/1');
+        mkdirSync(path + '/second_transcriptome/1');
+        mkdirSync(path + '/third_transcriptome/1');
     }
     files = fs.readdirSync(path); //需要用到同步读取 
     files.forEach(walk);

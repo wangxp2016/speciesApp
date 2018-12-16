@@ -68,7 +68,7 @@ module.exports = {
         link='${link}',
         images='${images}',
         type='${type}',
-        createTime='${createTime}',
+        createTime='${createTime}'
         WHERE id=${id};`);
     },
 

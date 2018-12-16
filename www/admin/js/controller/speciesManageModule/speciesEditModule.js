@@ -16,7 +16,6 @@ angular.module('app')
             }).success(function (data) {
                 G.expire(data);
                 $scope.species = data;
-                console.log("data.fileList", data.fileList);
                 $scope.fileList = data.fileList;
                 // 地理分布图片展示
                 $scope.distribution_img = $scope.species.distribution_img;
@@ -30,7 +29,6 @@ angular.module('app')
                 }
                 // 地理分布图片展示
                 $scope.removedistributionPic = function (path) {
-                    console.log("删除地理分布图片展示");
                     $scope.del = function () {
                         $http.get('/admin/species/distributionPicDel', {
                             params: {
@@ -55,7 +53,6 @@ angular.module('app')
 
                 // 形态图展示
                 $scope.removemorphologyPic = function (path) {
-                    console.log("删除形态图展示");
                     $scope.del = function () {
                         $http.get('/admin/species/morphologyPicDel', {
                             params: {

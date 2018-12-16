@@ -11,7 +11,8 @@ router
     .post('/speciesadd', upload.configure(), async (ctx) => {
         const species = ctx.request.body,
             speciesTime = moment().unix(),
-            keyWord =  species.species.substring(0,1),
+            literature = species.literature.join('||');
+            keyWord = species.species.substring(0, 1),
             distribution_img = upload.pathHandle(ctx, 'distribution_img'), // 获取图片路径
             morphology_img = upload.pathHandle(ctx, 'morphology_img'); // 获取图片路径
 
@@ -38,7 +39,7 @@ router
                 species.hindFemur_length_female,
                 species.pronotum_length_male,
                 species.pronotum_length_female,
-                species.literature,
+                literature,
                 speciesTime,
                 species.remark,
                 keyWord);
@@ -74,10 +75,10 @@ router
 
         // 删除图片文件
         const distribution_list = await speciesModel.distributionPicDel(ctx.query.id).picList(); // 获取全部图片
-        upload.fileDelete(list, 'distribution_img');
+        upload.fileDelete(distribution_list, 'distribution_img');
 
         const morphology_list = await speciesModel.morphologyPicDel(ctx.query.id).picList(); // 获取全部图片
-        upload.fileDelete(list, 'morphology_img');
+        upload.fileDelete(morphology_list, 'morphology_img');
 
         // 删除操作
         try {
@@ -107,7 +108,7 @@ router
         let species = ctx.request.body;
 
         try {
-            let distributionSite,morphologySite
+            let distributionSite, morphologySite
             if (ctx.request.files['distribution_img']) {
                 let distributionList = await speciesModel.distributionPicDel(species.id).picList(); // 全部地理分布图片路径
                 distributionSite = upload.fileUpdate(ctx, 'distribution_img', distributionList, 'distribution_img'); // 修改图片路径
@@ -117,7 +118,7 @@ router
                 morphologySite = upload.fileUpdate(ctx, 'morphology_img', morphologyList, 'morphology_img'); // 修改图片路径
             }
             let speciesTime = moment().unix();
-            let keyWord =  species.species.substring(0,1);
+            let keyWord = species.species.substring(0, 1);
             const data = await speciesModel.speciesEdit(
                 species.id,
                 species.order,

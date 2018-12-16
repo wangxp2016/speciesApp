@@ -54,7 +54,7 @@ router
 
         // 删除图片文件
         const link_img = await linkModel.linkPicDel(ctx.query.id).picList(); // 获取全部图片
-        upload.fileDelete(list, 'link_img');
+        upload.fileDelete(link_img, 'images');
 
         // 删除操作
         try {
@@ -115,7 +115,7 @@ router
             list = await linkModel.linkPicDel(params.id).picList(); // 获取全部图片
 
         // 删除图片文件及地址处理
-        const pic = upload.fileDelete(list, 'link_img', params.path);
+        const pic = upload.fileDelete(list, 'images', params.path);
 
         // 执行删除
         try {

@@ -18,13 +18,10 @@ angular.module('app')
                     $('#alerts .modal-body').text(data.msg);
                     $('#alerts').modal('show');
                     if (data.i) {
-                        // $scope.Tip = function () {
-                        console.log("添加成功");
                         // 跳转到列表
                         setTimeout(function () {
                             $state.go('link')
                         }, 500);
-                        // }
                     }
                 }
             });

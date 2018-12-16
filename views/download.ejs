@@ -1,0 +1,139 @@
+﻿<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <% include meta.ejs %>
+</head>
+<style>
+    .basic-info .basicInfo-block {
+        width: 460px;
+        float: left;
+    }
+    .basic-info .basicInfo-block .basicInfo-item.name {
+        width: 150px;
+        padding: 0 5px 0 12px;
+        font-weight: 700;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        word-wrap: normal;
+        color: #999;
+    }
+    .basic-info .basicInfo-block .basicInfo-item.value {
+        zoom: 1;
+        color: #333;
+        width: 285px;
+        float: left;
+        position: relative;
+        word-break: break-all;
+    }
+    .basic-info .basicInfo-block .basicInfo-item {
+        line-height: 26px;
+        display: block;
+        padding: 0;
+        margin: 0;
+        float: left;
+    }
+    .m-grouping .tit li {
+        width: auto;
+        height: auto;
+        text-align: left;
+        float: inherit;
+    }
+    .breadcrumb>li+li:before {
+        padding: 0 5px;
+        color: #ccc;
+        content: "/\00a0";
+    } 
+</style>
+
+<body>
+
+
+    <!--[if lt IE 8]>
+	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+	<![endif]-->
+
+    <div class="wrapper">
+        <% include header.ejs %>
+        <!--Breadcrumb One Start-->
+        <div class="breadcrumb-one mb-10">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="breadcrumb-img">
+                            <img src="/layout/img/page-banner/product-banner.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="product-description-review-area mb-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title2">Data -&gt; Download</h1>
+                        <div id="main" style="min-height: 10px;margin-top: 20px;">
+                            <ul id="browser" class="filetree">
+                                <li><span class="folder">download</span>
+                                    <ul>
+                                        <% for(let i=0,len=fileList.length;i<len;i++){ %>
+                                        <% if(!fileList[i].isEmpty){%>
+                                        <li class="closed"><span class="folder">
+                                                <%=fileList[i].name%></span>
+                                            <ul id=<%=fileList[i].name%>>
+                                                <% let speciesFolder1 = fileList[i].children %>
+                                                <% for(let j=0,len=speciesFolder1.length;j<len;j++){ %>
+                                                <li class="closed"><span class="folder">
+                                                        <%=speciesFolder1[j].name%></span>
+                                                    <ul id=<%=speciesFolder1[j].name%>>
+                                                        <% let speciesFolder2 = speciesFolder1[j].children %>
+                                                        <% for(let k=0,len=speciesFolder2.length;k<len;k++){ %>
+                                                        <li class="closed"><span class="folder">
+                                                                <%=speciesFolder2[k].name%></span>
+                                                            <ul id=<%=speciesFolder2[k].name%>>
+                                                                <% let speciesFile = speciesFolder2[k].children %>
+                                                                <% for(let k=0,len=speciesFile.length;k<len;k++){ %>
+                                                                <li> <img src="layout/img/icon/Package.png" style="width: 20px;height: 20px"
+                                                                        alt="">
+                                                                    <a href="<%=speciesFile[j].value.replace('www','')%>">
+                                                                        <%=speciesFile[k].name%></a></li>
+                                                                <%}%>
+                                                            </ul>
+                                                        </li>
+                                                        <%}%>
+                                                    </ul>
+                                                </li>
+                                                <%}%>
+                                            </ul>
+                                        </li>
+                                        <%}%>
+                                        <%}%>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <% include footer.ejs %>
+    </div>
+    <% include script.ejs %>
+    <script type="text/javascript">
+        $(function () {
+            $("#browser").treeview();
+            $("#browser").bind("contextmenu", function (event) {
+                if ($(event.target).is("li") || $(event.target).parents("li").length) {
+                    $("#browser").treeview({
+                        remove: $(event.target).parents("li").filter(":first")
+                    });
+                    return false;
+                }
+            });
+        })
+    </script>
+</body>
+
+</html>

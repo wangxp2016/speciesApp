@@ -18,7 +18,7 @@ angular.module('app')
             })
         }
         $scope.deleteItem = function (index) {
-            $scope.literatureList.splice(index,1)
+            $scope.literatureList.splice(index, 1)
         }
 
         // 添加物种
@@ -33,12 +33,10 @@ angular.module('app')
                     $('#alerts .modal-body').text(data.msg);
                     $('#alerts').modal('show');
                     if (data.i) {
-                        $scope.Tip = function () {
-                            // 跳转到列表
-                            setTimeout(function () {
-                                $state.go('species')
-                            }, 500);
-                        }
+                        // 跳转到列表
+                        setTimeout(function () {
+                            $state.go('species')
+                        }, 500);
                     }
                 }
             });

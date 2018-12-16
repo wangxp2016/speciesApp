@@ -118,14 +118,13 @@
                     var treeData = params.data;
                     if (treeData.children && treeData.children.length == 0) {
                         if (treeData.type == 'species') {
-                            window.location.href='/speciesDetail?species='+treeData.name;
+                            window.location.href = '/speciesDetail?species=' + treeData.name;
                         } else {
                             $.get('/species/getDataByKeyWord?name=' + treeData.name + '&type=' +
                                 treeData.type,
                                 function (data) {
                                     var newData = addNode([originData], data, -1);
                                     option.series[0].data = newData;
-                                    console.log("option.series[0].data", option.series[0].data);
                                     myChart.setOption(option);
                                 })
                         }
