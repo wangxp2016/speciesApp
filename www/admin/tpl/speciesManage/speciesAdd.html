@@ -209,14 +209,14 @@
                         <label class="col-md-2 control-label">
                             雄前翅长:
                         </label>
-                        <input name="forewing_length_male" type="text" class="form-control" placeholder="forewing_length" autocomplete="off"
-                            required>
+                        <input name="forewing_length_male" type="text" class="form-control" placeholder="forewing_length"
+                            autocomplete="off" required>
                         <br>
                         <label class="col-md-2 control-label">
                             雌前翅长:
                         </label>
-                        <input name="forewing_length_female" type="text" class="form-control" placeholder="forewing_length" autocomplete="off"
-                            required>
+                        <input name="forewing_length_female" type="text" class="form-control" placeholder="forewing_length"
+                            autocomplete="off" required>
                         <br>
                         <label class="col-md-2 control-label">
                             后足股节长:
@@ -245,14 +245,19 @@
                         <label class="col-md-2 control-label">
                             文献:
                         </label>
-                        <input name="literature" type="text" class="form-control" placeholder="literature"
-                            autocomplete="off" required>
+                        <div ng-repeat='item in literatureList' style="margin-left: 16.6%;margin-bottom: 10px;">
+                            <span>{{$index+1}}</span>
+                            <input name="literature" type="text" class="form-control" style="display:table-row;"
+                                placeholder="literature" autocomplete="off" required>
+                            <img ng-if="$last" src="./img/add.svg" alt="" ng-click="addItem()" style="width: 20px;height: 20px;cursor: pointer;">
+                            <img ng-if="!$last" src="./img/minus.svg" alt="" ng-click="deleteItem($index)" style="width: 20px;height: 20px;cursor: pointer;">
+                        </div>
                         <br>
                         <label class="col-md-2 control-label">
                             备注:
                         </label>
-                        <input name="remark" type="text" class="form-control" placeholder="remark"
-                            autocomplete="off" required>
+                        <input name="remark" type="text" class="form-control" placeholder="remark" autocomplete="off"
+                            required>
                         <br>
                         <br>
                         <div class="text-right">

@@ -39,6 +39,9 @@ router.use('/goods',require('./goods'));
 // 物种模块
 router.use('/species',require('./species'));
 
+// 链接模块
+router.use('/link',require('./link'));
+
 // 客户模块
 router.use('/customer',require('./customer'));
 

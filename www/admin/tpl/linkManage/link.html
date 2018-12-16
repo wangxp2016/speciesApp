@@ -5,31 +5,21 @@
             <!-- OVERVIEW -->
             <div class="panel panel-headline">
                 <div class="panel-heading">
-                    <h3 class="panel-title">案例管理</h3>
+                    <h3 class="panel-title">链接管理</h3>
                     <p class="panel-subtitle">news management</p>
                 </div>
                 <div class="panel-body">
                     <div class="tab-content">
                         <form class="form-inline" style="background: #f5f5f5;padding: 20px;">
-                            <div class="form-group" style="width: 20%;">
-                                <label>分类：</label>
-                                <span id="genreBox">
-                                    <select class="form-control select2" ng-model="genre">
-                                        <option value="">全部案例</option>
-                                        <option value="9">案例展示</option>
-                                    </select>
-                                </span>
-                            </div>
-                            &nbsp;&nbsp;&nbsp;
                             <div class="form-group">
-                                <label>关键词：</label>
+                                <label style="display:inline">关键词：</label>
                                 <input type="text" class="form-control" placeholder="请输入商品名称关键词" ng-model="kw">
                             </div>
                             &nbsp;&nbsp;&nbsp;
                             <button type="submit" class="btn btn-success btn-sm" ng-click="filterCond(genre,kw)">搜索</button>
                             <button type="reset" class="btn btn-info btn-sm" ng-click="resetFilter()">重置</button>
                             &nbsp;&nbsp;&nbsp;
-                            <a ui-sref="case-add" class="btn btn-primary btn-sm">添加案例</a>
+                            <a ui-sref="link-add" class="btn btn-primary btn-sm">添加链接</a>
                         </form>
 
                         <div class="tab-pane fade active in">
@@ -38,28 +28,21 @@
                                     <thead>
                                     <tr>
                                         <th>名称</th>
-                                        <th>分类</th>
+                                        <th>链接地址</th>
                                         <th>发布时间</th>
-                                        <th>热门案例</th>
                                         <th>操作</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr ng-repeat="d in goodsList.dataList">
+                                    <tr ng-repeat="d in linkList.dataList">
                                         <td>
-                                            <span ng-bind="d.goods_name" class="news-title"></span>
+                                            <span ng-bind="d.name" class="news-title"></span>
                                         </td>
-                                        <td ng-bind="d.sname"></td>
-                                        <td ng-bind="d.time"></td>
+                                        <td ng-bind="d.link"></td>
+                                        <td ng-bind="d.createTime"></td>
                                         <td>
-                                            <span ng-class="d.state?'label-success':'label-default';" class="label">
-                                                <span ng-if="d.state">是</span>
-                                                <span ng-if="!d.state">否</span>
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <button class="btn btn-xs btn-danger" data-toggle="modal" data-target=".confirms" ng-click="goodsDel(d.id)">删除</button>
-                                            <a ui-sref="case-edit({id:d.id})" class="btn btn-xs btn-primary">修改</a>
+                                            <button class="btn btn-xs btn-danger" data-toggle="modal" data-target=".confirms" ng-click="linkDel(d.id)">删除</button>
+                                            <a ui-sref="link-edit({id:d.id})" class="btn btn-xs btn-primary">修改</a>
                                         </td>
                                     </tr>
                                     </tbody>
@@ -74,9 +57,9 @@
             <nav aria-label="" class="text-right">
                 <paging
                         class="small"
-                        page="goodsList.page"
+                        page="linkList.page"
                         page-size="pagesize"
-                        total="goodsList.totalRows"
+                        total="linkList.totalRows"
                         scroll-top="{{scrollTop}}"
                         show-prev-next="true"
                         show-first-last="true"
@@ -92,7 +75,7 @@
     <div class="modal-dialog modal-sm" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                确认删除该案例？
+                确认删除该链接？
             </div>
             <div class="modal-footer">
                 <button class="btn btn-xs btn-danger" ng-click="del()">确认删除</button>

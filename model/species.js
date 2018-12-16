@@ -3,7 +3,7 @@ const moment = require('moment');
 
 module.exports = {
 
-    // 商品添加
+    // 物种添加
     speciesAdd(order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male, body_length_female, forewing_length_male, forewing_length_female, hindFemur_length_male, hindFemur_length_female, pronotum_length_male, pronotum_length_female, literature, species_time, remark,keyWord) {
 
         // 默认值判断
@@ -36,7 +36,7 @@ module.exports = {
             ('${order_m}','${suborder}','${superfamily}','${family}','${subfamily}','${genus}','${species}','${introduction}','${distribution_img}','${distribution}','${morphology_img}','${body_color}','${body_length_male}','${body_length_female}','${forewing_length_male}','${forewing_length_female}','${hindFemur_length_male}','${hindFemur_length_female}','${pronotum_length_male}','${pronotum_length_female}','${literature}','${species_time}','${remark}','${keyWord}');`);
     },
 
-    // 查询商品列表
+    // 查询物种列表
     speciesList(page, pagesize, species) {
         // 查询条件设置
         let condition = `WHERE 1=1`;

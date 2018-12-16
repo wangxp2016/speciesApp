@@ -18,6 +18,9 @@ router.use('goodsDetail',require('./goods_detail'));
 // 网站物种详情 模块
 router.use('species',require('./species'));
 
+// 网站专家 模块
+router.use('link',require('./link'));
+
 // 网站物种详情 模块
 router.use('speciesDetail',require('./species_detail'));
 

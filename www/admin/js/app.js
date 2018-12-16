@@ -140,6 +140,36 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
                 }
             }
         })
+        // 链接管理
+        .state('link', {
+            url: '/link',
+            views: {
+                'view': {
+                    controller: 'linkCtrl',
+                    templateUrl: 'tpl/linkManage/link.html'
+                }
+            }
+        })
+        // 链接添加
+        .state('link-add', {
+            url: '/linkAdd',
+            views: {
+                'view': {
+                    controller: 'linkAddCtrl',
+                    templateUrl: 'tpl/linkManage/linkAdd.html'
+                }
+            }
+        })
+        // 链接编辑
+        .state('link-edit', {
+            url: '/linkEdit/:id',
+            views: {
+                'view': {
+                    controller: 'linkEditCtrl',
+                    templateUrl: 'tpl/linkManage/linkEdit.html'
+                }
+            }
+        })
 
         // 案例管理
         .state('case', {
