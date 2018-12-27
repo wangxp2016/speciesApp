@@ -9,15 +9,17 @@ const info = require('../../middlewares/info');
 router
     // 添加商品
     .post('/speciesadd', upload.configure(), async (ctx) => {
-        const species = ctx.request.body,
-            speciesTime = moment().unix(),
-            literature = species.literature.join('||');
-            keyWord = species.species.substring(0, 1),
-            distribution_img = upload.pathHandle(ctx, 'distribution_img'), // 获取图片路径
-            morphology_img = upload.pathHandle(ctx, 'morphology_img'); // 获取图片路径
-
+        const species = ctx.request.body;
         // 添加操作
         try {
+            const speciesTime = moment().unix(),
+                keyWord = species.species.substring(0, 1),
+                distribution_img = upload.pathHandle(ctx, 'distribution_img'), // 获取图片路径
+                morphology_img = upload.pathHandle(ctx, 'morphology_img'); // 获取图片路径
+            let literature = '';
+            if (species.literature && Array.isArray(species.literature)) {
+                literature = species.literature.join('||');
+            }
             const data = await speciesModel.speciesAdd(
                 species.order,
                 species.suborder,
@@ -108,7 +110,10 @@ router
         let species = ctx.request.body;
 
         try {
-            let distributionSite, morphologySite
+            let distributionSite, morphologySite, literature = '';
+            if (species.literature && Array.isArray(species.literature)) {
+                literature = species.literature.join('||');
+            }
             if (ctx.request.files['distribution_img']) {
                 let distributionList = await speciesModel.distributionPicDel(species.id).picList(); // 全部地理分布图片路径
                 distributionSite = upload.fileUpdate(ctx, 'distribution_img', distributionList, 'distribution_img'); // 修改图片路径

@@ -117,12 +117,15 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <% let morphologypics = speciesDetail.morphology_img.split(',') %>
+                    <% if(speciesDetail.introduction.length>0){%>
                     <div class="col-md-8">
                         <h2 class="title-text" style="margin-bottom: 20px;">introduction</h2>
                         <span>
                             <%=speciesDetail.introduction%></span>
                         <br>
                     </div>
+                    <%}%>
+                    <% if(morphologypics[0].length>0){%>
                     <div class="col-md-4">
                         <div class="product-large-thumb img-full" style="margin-top: 60px;">
                             <div class="easyzoom easyzoom--overlay">
@@ -135,15 +138,43 @@
                         </div>
                     </div>
                 </div>
+                <%}%>
+                <% if(speciesDetail.body_color.length>0){%>
                 <hr style="margin: 30px 0;">
                 <div class="row">
-                    <% let distributionpics = speciesDetail.distribution_img.split(',') %>
+                    <div class="col-md-12">
+                        <h2 class="title-text" style="margin-bottom: 20px;">体色</h2>
+                        <span>
+                            <%=speciesDetail.body_color%></span>
+                        <br>
+                    </div>
+                </div>
+                <%}%>
+                <% if(speciesDetail.body_color.length>0){%>
+                <hr style="margin: 30px 0;">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="title-text" style="margin-bottom: 20px;">生境型</h2>
+                        <span>
+                            <%=speciesDetail.body_color%></span>
+                        <br>
+                    </div>
+                </div>
+                <%}%>
+                <% let distributionpics = speciesDetail.distribution_img.split(',') %>
+                <% if(speciesDetail.distribution.length>0){%>
+                <hr style="margin: 30px 0;">
+                <div class="row">
                     <div class="col-md-12">
                         <h2 class="title-text" style="margin-bottom: 20px;">地理分布</h2>
                         <span>
                             <%=speciesDetail.distribution%></span>
                         <br>
                     </div>
+                </div>
+                <%}%>
+                <% if(distributionpics[0].length>0){%>
+                <div class="row">
                     <div class="col-md-12">
                         <div class="product-large-thumb img-full text-center" style="margin: 0px auto;">
                             <div class="easyzoom easyzoom--overlay">
@@ -156,6 +187,8 @@
                         </div>
                     </div>
                 </div>
+                <%}%>
+                <% if(morphologypics[0].length>0){%>
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
@@ -175,6 +208,8 @@
                         <% } %>
                     </div>
                 </div>
+                <%}%>
+                <% if(speciesDetail.body_color||speciesDetail.body_length_male||speciesDetail.forewing_length_male||speciesDetail.hindFemur_length_male||speciesDetail.pronotum_length_male||speciesDetail.body_length_female||speciesDetail.forewing_length_female||speciesDetail.hindFemur_length_female||speciesDetail.pronotum_length_female){%>
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
@@ -184,7 +219,7 @@
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>体色</th>
+                                        <th>细胞核大小</th>
                                         <th>体长</th>
                                         <th>前翅长</th>
                                         <th>后足股节长</th>
@@ -233,6 +268,8 @@
                         </div>
                     </div>
                 </div>
+                <%}%>
+                <% if(speciesDetail.literature.length>0){%>
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
@@ -246,6 +283,7 @@
                         </ul>
                     </div>
                 </div>
+                <%}%>
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">

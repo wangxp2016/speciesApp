@@ -7,6 +7,7 @@ angular.module('app')
         $anchorScroll();
 
         $scope.unique = $stateParams.id;
+
         // 物种详情
         (function msgInit() {
             $http.get('/admin/species/speciesonly', {
@@ -16,7 +17,13 @@ angular.module('app')
             }).success(function (data) {
                 G.expire(data);
                 $scope.species = data;
-                $scope.fileList = data.fileList;
+                $scope.literatureList = data.literature.split("||");
+                $scope.addItem = function () {
+                    $scope.literatureList.push("")
+                };
+                $scope.deleteItem = function (index) {
+                    $scope.literatureList.splice(index, 1)
+                };
                 // 地理分布图片展示
                 $scope.distribution_img = $scope.species.distribution_img;
                 if ($scope.distribution_img) {
@@ -87,12 +94,10 @@ angular.module('app')
                             $('#alerts .modal-body').text(data.msg);
                             $('#alerts').modal('show');
                             if (data.i) {
-                                $scope.Tip = function () {
-                                    // 跳转到列表
-                                    setTimeout(function () {
-                                        $state.go('species')
-                                    }, 500);
-                                }
+                                // 跳转到列表
+                                setTimeout(function () {
+                                    $state.go('species')
+                                }, 500);
                             }
                         }
                     });

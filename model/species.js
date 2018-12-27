@@ -4,7 +4,7 @@ const moment = require('moment');
 module.exports = {
 
     // 物种添加
-    speciesAdd(order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male, body_length_female, forewing_length_male, forewing_length_female, hindFemur_length_male, hindFemur_length_female, pronotum_length_male, pronotum_length_female, literature, species_time, remark,keyWord) {
+    speciesAdd(order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male, body_length_female, forewing_length_male, forewing_length_female, hindFemur_length_male, hindFemur_length_female, pronotum_length_male, pronotum_length_female, literature, species_time, remark, keyWord) {
 
         // 默认值判断
         !order_m ? order_m = `` : ``;
@@ -93,8 +93,8 @@ module.exports = {
             list // 数据分页
         };
     },
-     // 查询物种tree
-     speciesOverviewNum() {
+    // 查询物种tree
+    speciesOverviewNum() {
         return sql.query(`SELECT keyWord,COUNT(keyWord) num FROM species GROUP BY keyWord;`);
     },
 
@@ -104,7 +104,7 @@ module.exports = {
     },
 
     // 修改物种
-    speciesEdit(id, order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male, body_length_female, forewing_length_male, forewing_length_female, hindFemur_length_male, hindFemur_length_female, pronotum_length_male, pronotum_length_female, literature, species_time, remark,keyWord) {
+    speciesEdit(id, order_m, suborder, superfamily, family, subfamily, genus, species, introduction, distribution_img, distribution, morphology_img, body_color, body_length_male, body_length_female, forewing_length_male, forewing_length_female, hindFemur_length_male, hindFemur_length_female, pronotum_length_male, pronotum_length_female, literature, species_time, remark, keyWord) {
 
         // 默认值判断
         !order_m ? order_m = `` : ``;
@@ -117,6 +117,7 @@ module.exports = {
         !introduction ? introduction = `` : ``;
         !distribution_img ? distribution_img = `` : ``;
         !distribution ? distribution = `` : ``;
+        !morphology_img ? morphology_img = `` : ``;
         !body_color ? body_color = `` : ``;
         !body_length_male ? body_length_male = `` : ``;
         !body_length_female ? body_length_female = `` : ``;
@@ -154,7 +155,7 @@ module.exports = {
         pronotum_length_female='${pronotum_length_female}',
         literature='${literature}',
         species_time='${species_time}',
-        remark='${remark}' 
+        remark='${remark}' ,
         keyWord='${keyWord}' 
         WHERE id=${id};`);
     },

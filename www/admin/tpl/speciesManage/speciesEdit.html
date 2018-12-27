@@ -119,7 +119,7 @@
                             地理分布简介:
                         </label>
                         <textarea name="distribution" type="text" rows="5" class="form-control" placeholder="distribution"
-                            autocomplete="off" required>{{species.distribution}}</textarea>
+                            autocomplete="off">{{species.distribution}}</textarea>
                         <br>
                         <!-- 形态图图片 -->
                         <p style="margin-bottom: 5px;">形态图图片：(<span style="color: red">最多上传9张</span>)</p>
@@ -213,62 +213,75 @@
                             </div>
                         </div>
                         <br>
-                        <label class="col-md-2 control-label">
-                            性别:
-                        </label>
-                        <input type="radio" name="sex" value="female" ng-model="species.sex"> 雌
-                        <input type="radio" name="sex" value="male" ng-model="species.sex"> 雄<br>
-                        <br>
+
                         <label class="col-md-2 control-label">
                             体色:
                         </label>
-                        <input name="body_color" type="text" class="form-control" placeholder="body_color" autocomplete="off"
-                            required value="{{species.body_color}}">
+                        <input name="body_color" type="text" class="form-control" placeholder="body_color" autocomplete="off" value="{{species.body_color}}">
                         <br>
                         <label class="col-md-2 control-label">
-                            体长:
+                            雄体长:
                         </label>
-                        <input name="body_length" type="text" class="form-control" placeholder="body_length"
-                            autocomplete="off" required value="{{species.body_length}}">
+                        <input name="body_length_male" type="text" class="form-control" placeholder="body_length"
+                            autocomplete="off" value="{{species.body_length_male}}">
                         <br>
                         <label class="col-md-2 control-label">
-                            前胸背板:
+                            雌体长:
                         </label>
-                        <input name="pronotum_length" type="text" class="form-control" placeholder="pronotum_length"
-                            autocomplete="off" required value="{{species.pronotum_length}}">
+                        <input name="body_length_female" type="text" class="form-control" placeholder="body_length"
+                            autocomplete="off" value="{{species.body_length_female}}">
                         <br>
                         <label class="col-md-2 control-label">
-                            前翅长:
+                            雄前翅长:
                         </label>
-                        <input name="forewing_length" type="text" class="form-control" placeholder="forewing_length"
-                            autocomplete="off" required value="{{species.forewing_length}}">
+                        <input name="forewing_length_male" type="text" class="form-control" placeholder="forewing_length"
+                            autocomplete="off" value="{{species.forewing_length_male}}">
+                        <br>
+                        <label class="col-md-2 control-label">
+                            雌前翅长:
+                        </label>
+                        <input name="forewing_length_female" type="text" class="form-control" placeholder="forewing_length"
+                            autocomplete="off" value="{{species.forewing_length_female}}">
                         <br>
                         <label class="col-md-2 control-label">
                             后足股节长:
                         </label>
-                        <input name="hindFemur_length" type="text" class="form-control" placeholder="hindFemur_length"
-                            autocomplete="off" required value="{{species.hindFemur_length}}">
+                        <input name="hindFemur_length_male" type="text" class="form-control" placeholder="hindFemur_length"
+                            autocomplete="off" value="{{species.hindFemur_length_male}}">
+                        <br>
+                        <label class="col-md-2 control-label">
+                            后足股节长:
+                        </label>
+                        <input name="hindFemur_length_female" type="text" class="form-control" placeholder="hindFemur_length"
+                            autocomplete="off" value="{{species.hindFemur_length_female}}">
+                        <br>
+                        <label class="col-md-2 control-label">
+                            前胸背板:
+                        </label>
+                        <input name="pronotum_length_male" type="text" class="form-control" placeholder="pronotum_length"
+                            autocomplete="off" value="{{species.pronotum_length_male}}">
+                        <br>
+                        <label class="col-md-2 control-label">
+                            前胸背板:
+                        </label>
+                        <input name="pronotum_length_female" type="text" class="form-control" placeholder="pronotum_length"
+                            autocomplete="off" value="{{species.pronotum_length_female}}">
                         <br>
                         <label class="col-md-2 control-label">
                             文献:
                         </label>
-                        <input name="literature" type="text" class="form-control" placeholder="literature" autocomplete="off"
-                            required value="{{species.literature}}">
+                        <div ng-repeat='item in literatureList' style="margin-left: 16.6%;margin-bottom: 10px;">
+                            <span>{{$index+1}}</span>
+                            <input name="literature" type="text" class="form-control" style="display:table-row;"
+                                placeholder="literature" autocomplete="off" value="{{item}}">
+                            <img ng-if="$last" src="./img/add.svg" alt="" ng-click="addItem()" style="width: 20px;height: 20px;cursor: pointer;">
+                            <img ng-if="!$last" src="./img/minus.svg" alt="" ng-click="deleteItem($index)" style="width: 20px;height: 20px;cursor: pointer;">
+                        </div>
                         <br>
                         <label class="col-md-2 control-label">
                             备注:
                         </label>
-                        <input name="remark" type="text" class="form-control" placeholder="remark" autocomplete="off"
-                            required value="{{species.remark}}">
-                        <br>
-                        <p style="margin-bottom: 5px;" ng-if="morphology_img">文件列表</p>
-                        <div class="row">
-                            <div class="col-md-2" ng-repeat="p in fileList">
-                                <div class="thumbnail">
-                                    <a ng-href="{{p.path}}">{{p.filename}}</a>
-                                </div>
-                            </div>
-                        </div>
+                        <input name="remark" type="text" class="form-control" placeholder="remark" autocomplete="off" value="{{species.remark}}">
                         <br>
                         <br>
                         <div class="text-right">
