@@ -273,7 +273,7 @@
                         <div ng-repeat='item in literatureList' style="margin-left: 16.6%;margin-bottom: 10px;">
                             <span>{{$index+1}}</span>
                             <input name="literature" type="text" class="form-control" style="display:table-row;"
-                                placeholder="literature" autocomplete="off" value="{{item}}">
+                                placeholder="literature" autocomplete="off" value="{{item.name}}">
                             <img ng-if="$last" src="./img/add.svg" alt="" ng-click="addItem()" style="width: 20px;height: 20px;cursor: pointer;">
                             <img ng-if="!$last" src="./img/minus.svg" alt="" ng-click="deleteItem($index)" style="width: 20px;height: 20px;cursor: pointer;">
                         </div>

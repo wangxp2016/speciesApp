@@ -17,9 +17,16 @@ angular.module('app')
             }).success(function (data) {
                 G.expire(data);
                 $scope.species = data;
-                $scope.literatureList = data.literature.split("||");
+                var literatures = data.literature.split("||");
+                $scope.literatureList = [];
+                for (let i in literatures) {
+                    $scope.literatureList.push({
+                        id: i,
+                        name: literatures[i]
+                    })
+                }
                 $scope.addItem = function () {
-                    $scope.literatureList.push("")
+                    $scope.literatureList.push({id:'',name:''})
                 };
                 $scope.deleteItem = function (index) {
                     $scope.literatureList.splice(index, 1)

@@ -6,6 +6,10 @@ const speciesModel = require('../../model/species');
 const upload = require('../../middlewares/uploaded');
 const info = require('../../middlewares/info');
 
+function firstUpperCase(str) {
+    return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase());
+}
+
 router
     // 添加商品
     .post('/speciesadd', upload.configure(), async (ctx) => {
@@ -21,13 +25,13 @@ router
                 literature = species.literature.join('||');
             }
             const data = await speciesModel.speciesAdd(
-                species.order,
-                species.suborder,
-                species.superfamily,
-                species.family,
-                species.subfamily,
-                species.genus,
-                species.species,
+                firstUpperCase(species.order),
+                firstUpperCase(species.suborder),
+                firstUpperCase(species.superfamily),
+                firstUpperCase(species.family),
+                firstUpperCase(species.subfamily),
+                firstUpperCase(species.genus),
+                firstUpperCase(species.species),
                 species.introduction,
                 distribution_img,
                 species.distribution,
@@ -126,13 +130,13 @@ router
             let keyWord = species.species.substring(0, 1);
             const data = await speciesModel.speciesEdit(
                 species.id,
-                species.order,
-                species.suborder,
-                species.superfamily,
-                species.family,
-                species.subfamily,
-                species.genus,
-                species.species,
+                firstUpperCase(species.order),
+                firstUpperCase(species.suborder),
+                firstUpperCase(species.superfamily),
+                firstUpperCase(species.family),
+                firstUpperCase(species.subfamily),
+                firstUpperCase(species.genus),
+                firstUpperCase(species.species),
                 species.introduction,
                 distributionSite,
                 species.distribution,
@@ -146,7 +150,7 @@ router
                 species.hindFemur_length_female,
                 species.pronotum_length_male,
                 species.pronotum_length_female,
-                species.literature,
+                literature,
                 speciesTime,
                 species.remark,
                 keyWord

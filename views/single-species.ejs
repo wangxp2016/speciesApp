@@ -114,18 +114,16 @@
                         </div>
                     </div>
                 </div>
+                <% let morphologypics = speciesDetail.morphology_img.split(',') %>
+                <% if(speciesDetail.introduction.length>0){%>
                 <hr style="margin: 30px 0;">
                 <div class="row">
-                    <% let morphologypics = speciesDetail.morphology_img.split(',') %>
-                    <% if(speciesDetail.introduction.length>0){%>
                     <div class="col-md-8">
                         <h2 class="title-text" style="margin-bottom: 20px;">introduction</h2>
                         <span>
                             <%=speciesDetail.introduction%></span>
                         <br>
                     </div>
-                    <%}%>
-                    <% if(morphologypics[0].length>0){%>
                     <div class="col-md-4">
                         <div class="product-large-thumb img-full" style="margin-top: 60px;">
                             <div class="easyzoom easyzoom--overlay">

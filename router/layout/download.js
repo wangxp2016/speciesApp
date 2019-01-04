@@ -18,7 +18,6 @@ router
                     file.isEmpty = false;
                 }
             }
-            console.log(fileList[i]);
         }
         const I = await layout.webI();
 
