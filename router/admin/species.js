@@ -118,13 +118,17 @@ router
             if (species.literature && Array.isArray(species.literature)) {
                 literature = species.literature.join('||');
             }
+            let distributionList = await speciesModel.distributionPicDel(species.id).picList(); // 全部地理分布图片路径
             if (ctx.request.files['distribution_img']) {
-                let distributionList = await speciesModel.distributionPicDel(species.id).picList(); // 全部地理分布图片路径
                 distributionSite = upload.fileUpdate(ctx, 'distribution_img', distributionList, 'distribution_img'); // 修改图片路径
+            } else {
+                distributionSite = distributionList[0].distribution_img;
             }
+            let morphologyList = await speciesModel.morphologyPicDel(species.id).picList(); // 全部形态图片路径
             if (ctx.request.files['morphology_img']) {
-                let morphologyList = await speciesModel.morphologyPicDel(species.id).picList(); // 全部形态图片路径
                 morphologySite = upload.fileUpdate(ctx, 'morphology_img', morphologyList, 'morphology_img'); // 修改图片路径
+            } else {
+                morphologySite = morphologyList[0].morphology_img;
             }
             let speciesTime = moment().unix();
             let keyWord = species.species.substring(0, 1);
