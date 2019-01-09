@@ -29,7 +29,11 @@
                                     <div class="row">
                                         <section class="col-sm-12">
                                             <a id="main-content"></a>
-                                            <h1 class="page-header">Species Overview</h1>
+                                            <h1 class="page-header">Species Overview
+                                                <img style="width: 25px;height: 25px;float: right;margin-top: 10px;margin-left: 5px;cursor: pointer" onclick="search()" src="layout/img/icon/search-icon.svg"
+                                                    alt="">
+                                                <input type="text" id="search" style="float: right;width: 200px;height: 40px;"
+                                                    placeholder="Species search" value=""></h1>
                                             <div class="region region-content">
                                                 <section id="block-system-main" class="block block-system clearfix">
                                                     <div class="view-species-glossary view-id-species_glossary view-display-id-page view-dom-id-61818f7a4d8f5d43003ce67afeffa67f jquery-once-1-processed">
@@ -140,7 +144,11 @@
 
         // 设置跳转地址
         hrefId = '/overview';
-
+        
+        function search(){
+            var name = $("#search").val();
+            window.location.href = "/overview?page=1&word=" + name
+        }
         // 分页及参数设置
         try {
             $('#jqpaginatorId').jqPaginator({
