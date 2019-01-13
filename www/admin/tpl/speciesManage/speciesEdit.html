@@ -61,7 +61,7 @@
                         <label class="col-md-2 control-label">
                             物种介绍：
                         </label>
-                        <textarea name="introduction" id="content" class="form-control">{{species.introduction}}</textarea>
+                        <textarea name="introduction" id="content" class="ckeditor form-control" ng-bind-html="species.introduction"></textarea>
                         <br>
                         <!-- 地理分布图片 -->
                         <p style="margin-bottom: 5px;">地理分布图片：(<span style="color: red">最多上传4张</span>)</p>
@@ -217,7 +217,8 @@
                         <label class="col-md-2 control-label">
                             体色:
                         </label>
-                        <input name="body_color" type="text" class="form-control" placeholder="body_color" autocomplete="off" value="{{species.body_color}}">
+                        <input name="body_color" type="text" class="form-control" placeholder="body_color" autocomplete="off"
+                            value="{{species.body_color}}">
                         <br>
                         <label class="col-md-2 control-label">
                             雄体长:
@@ -281,7 +282,8 @@
                         <label class="col-md-2 control-label">
                             备注:
                         </label>
-                        <input name="remark" type="text" class="form-control" placeholder="remark" autocomplete="off" value="{{species.remark}}">
+                        <input name="remark" type="text" class="form-control" placeholder="remark" autocomplete="off"
+                            value="{{species.remark}}">
                         <br>
                         <br>
                         <div class="text-right">
@@ -330,6 +332,11 @@
 
     .form-control {
         width: 500px
+    }
+
+    #cke_content {
+        margin-left: 220px;
+        width: 950px;
     }
 </style>
 <script>
