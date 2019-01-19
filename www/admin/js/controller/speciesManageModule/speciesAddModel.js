@@ -20,6 +20,24 @@ angular.module('app')
         $scope.deleteItem = function (index) {
             $scope.literatureList.splice(index, 1)
         }
+         // 富文本编辑器配置
+         CKEDITOR.replace('content', {
+            toolbar: [
+                ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+                ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                ['Link', 'Unlink', 'Anchor'],
+                ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                '/',
+                ['Styles', 'Format', 'Font', 'FontSize'],
+                ['TextColor', 'BGColor'],
+                ['Maximize', 'ShowBlocks', '-']
+            ],
+            height: 250,
+            removePlugins: 'elementspath' // 移除编辑器底部状态栏显示的元素路径和调整编辑器大小的按钮 elementspath,resize
+            // removeDialogTabs: '/uploads', // 配置图片上传路径
+            // filebrowserImageUploadUrl: '/uploads?type=images'
+        });
 
         // 添加物种
         $scope.speciesAdd = function () {

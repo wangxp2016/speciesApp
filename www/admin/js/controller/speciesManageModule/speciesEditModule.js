@@ -53,6 +53,11 @@ angular.module('app')
                 $scope.deleteItem = function (index) {
                     $scope.literatureList.splice(index, 1)
                 };
+                // 生境型图片展示
+                $scope.habitat_img = $scope.species.habitat_img;
+                if ($scope.habitat_img) {
+                    $scope.habitat_img = $scope.habitat_img.split(',');
+                }
                 // 地理分布图片展示
                 $scope.distribution_img = $scope.species.distribution_img;
                 if ($scope.distribution_img) {
@@ -63,7 +68,30 @@ angular.module('app')
                 if ($scope.morphology_img) {
                     $scope.morphology_img = $scope.morphology_img.split(',');
                 }
-                // 地理分布图片展示
+                // 删除生境型图片
+                $scope.removehabitatPic = function (path) {
+                    $scope.del = function () {
+                        $http.get('/admin/species/habitatPicDel', {
+                            params: {
+                                id: $stateParams.id,
+                                path: path
+                            }
+                        }).success(function (data) {
+                            $('.confirms').modal('hide');
+                            $('#alerts .modal-body').text(data.msg);
+                            $('#alerts').modal('show');
+                            if (data.i) {
+                                $scope.Tip = function () {
+                                    // 更新数据
+                                    setTimeout(function () {
+                                        location.reload()
+                                    }, 500)
+                                }
+                            }
+                        });
+                    };
+                };
+                // 删除地理分布图片
                 $scope.removedistributionPic = function (path) {
                     $scope.del = function () {
                         $http.get('/admin/species/distributionPicDel', {
@@ -87,7 +115,7 @@ angular.module('app')
                     };
                 };
 
-                // 形态图展示
+                // 删除形态图
                 $scope.removemorphologyPic = function (path) {
                     $scope.del = function () {
                         $http.get('/admin/species/morphologyPicDel', {

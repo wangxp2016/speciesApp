@@ -18,6 +18,7 @@ router
         try {
             const speciesTime = moment().unix(),
                 keyWord = species.species.substring(0, 1),
+                habitat_img = upload.pathHandle(ctx, 'habitat_img'), // 获取图片路径
                 distribution_img = upload.pathHandle(ctx, 'distribution_img'), // 获取图片路径
                 morphology_img = upload.pathHandle(ctx, 'morphology_img'); // 获取图片路径
             let literature = '';
@@ -33,6 +34,8 @@ router
                 firstUpperCase(species.genus),
                 firstUpperCase(species.species),
                 species.introduction,
+                species.habitat,
+                habitat_img,
                 distribution_img,
                 species.distribution,
                 morphology_img,
@@ -80,6 +83,10 @@ router
     .get('/speciesdel', async (ctx) => {
 
         // 删除图片文件
+        const habitat_list = await speciesModel.habitatPicDel(ctx.query.id).picList(); // 获取全部图片
+        upload.fileDelete(habitat_list, 'habitat_img');
+
+        // 删除图片文件
         const distribution_list = await speciesModel.distributionPicDel(ctx.query.id).picList(); // 获取全部图片
         upload.fileDelete(distribution_list, 'distribution_img');
 
@@ -114,22 +121,32 @@ router
         let species = ctx.request.body;
 
         try {
-            let distributionSite, morphologySite, literature = '';
+            let habitatSite,distributionSite, morphologySite, literature = '';
             if (species.literature && Array.isArray(species.literature)) {
                 literature = species.literature.join('||');
             }
+
+            let habitatList = await speciesModel.habitatPicDel(species.id).picList(); // 全部地理分布图片路径
+            if (ctx.request.files['habitat_img']) {
+                habitatSite = upload.fileUpdate(ctx, 'habitat_img', habitatList, 'habitat_img'); // 修改图片路径
+            } else {
+                habitatSite = habitatList[0].habitat_img;
+            }
+
             let distributionList = await speciesModel.distributionPicDel(species.id).picList(); // 全部地理分布图片路径
             if (ctx.request.files['distribution_img']) {
                 distributionSite = upload.fileUpdate(ctx, 'distribution_img', distributionList, 'distribution_img'); // 修改图片路径
             } else {
                 distributionSite = distributionList[0].distribution_img;
             }
+
             let morphologyList = await speciesModel.morphologyPicDel(species.id).picList(); // 全部形态图片路径
             if (ctx.request.files['morphology_img']) {
                 morphologySite = upload.fileUpdate(ctx, 'morphology_img', morphologyList, 'morphology_img'); // 修改图片路径
             } else {
                 morphologySite = morphologyList[0].morphology_img;
             }
+
             let speciesTime = moment().unix();
             let keyWord = species.species.substring(0, 1);
             const data = await speciesModel.speciesEdit(
@@ -142,6 +159,8 @@ router
                 firstUpperCase(species.genus),
                 firstUpperCase(species.species),
                 species.introduction,
+                habitat,
+                habitatSite,
                 distributionSite,
                 species.distribution,
                 morphologySite,
@@ -172,7 +191,29 @@ router
         }
     })
 
-    // 删除商品图片
+    // 删除生境型图片
+    .get('/habitatPicDel', async (ctx) => {
+        const params = ctx.query,
+            list = await speciesModel.habitatPicDel(params.id).picList(); // 获取全部图片
+
+        // 删除图片文件及地址处理
+        const pic = upload.fileDelete(list, 'habitat_img', params.path);
+
+        // 执行删除
+        try {
+            const data = await speciesModel.habitatPicDel(params.id, pic).upPic();
+            if (data.affectedRows) {
+                // 删除成功
+                ctx.body = info.suc('删除成功！');
+            } else {
+                // 删除失败
+                ctx.body = info.err('删除失败，请重试！');
+            }
+        } catch (e) {
+            ctx.body = info.err('操作失败，请重试！');
+        }
+    })
+    // 删除地理分布图片
     .get('/distributionPicDel', async (ctx) => {
         const params = ctx.query,
             list = await speciesModel.distributionPicDel(params.id).picList(); // 获取全部图片
@@ -195,7 +236,7 @@ router
         }
     })
 
-    // 删除商品图片
+    // 删除形态图图片
     .get('/morphologyPicDel', async (ctx) => {
         const params = ctx.query,
             list = await speciesModel.morphologyPicDel(params.id).picList(); // 获取全部图片

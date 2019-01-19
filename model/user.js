@@ -15,8 +15,8 @@ module.exports={
         return sql.query(`SELECT tel FROM user WHERE tel='${tel}';`);
     },
     // 用户添加
-    userAdd(username,password,tel,roles){
-        return sql.query(`INSERT INTO user (username,password,tel,roles) VALUES ('${username}','${password}','${tel}','${roles}');`);
+    userAdd(username,password,tel,roles,rolesType){
+        return sql.query(`INSERT INTO user (username,password,tel,roles,rolesType) VALUES ('${username}','${password}','${tel}','${roles}','${rolesType}');`);
     },
     // 用户删除
     userDel(id){

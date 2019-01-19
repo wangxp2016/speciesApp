@@ -154,8 +154,24 @@
                     <div class="col-md-12">
                         <h2 class="title-text" style="margin-bottom: 20px;">生境型</h2>
                         <span>
-                            <%=speciesDetail.body_color%></span>
+                            <%=speciesDetail.habitat%></span>
                         <br>
+                    </div>
+                </div>
+                <%}%>
+                <% let habitatpics = speciesDetail.habitat_img.split(',') %>                
+                <% if(habitatpics[0].length>0){%>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="product-large-thumb img-full text-center" style="margin: 0px auto;">
+                            <div class="easyzoom easyzoom--overlay">
+                                <a href="<%=habitatpics[0]%>">
+                                    <img style="width: 300px;height: 225px" src="<%=habitatpics[0]%>" alt="">
+                                </a>
+                                <a href="<%=habitatpics[0]%>" class="popup-img venobox" data-gall="myGallery"><i
+                                        class="fa fa-search"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <%}%>

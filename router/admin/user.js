@@ -51,12 +51,16 @@ router
     // 用户添加
     .post('/useradd', async (ctx)=>{
         const user=ctx.request.body;
+        let roles = '普通用户';
+        if(user.rolesType=='admin'){
+            roles = '管理员';
+        }
         const password=md5(md5(user.password).substr(4,7)+md5(user.password));
         try{
             const telCheck=await userModel.userTel(user.tel);
             // 电话查重
             if(telCheck.length===0){
-                const data=await userModel.userAdd(user.username,password,user.tel,user.roles);
+                const data=await userModel.userAdd(user.username,password,user.tel,roles,user.rolesType);
                 if(data.affectedRows){
                     // 新增成功
                     ctx.body=info.suc('新增成功！');

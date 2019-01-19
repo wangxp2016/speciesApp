@@ -60,7 +60,35 @@
                         <label class="col-md-2 control-label">
                             物种介绍：
                         </label>
-                        <textarea name="introduction" id="content" class="form-control"></textarea>
+                        <textarea name="introduction" id="content" class="ckeditor form-control" ng-bind-html="species.introduction"></textarea>
+                        <br>
+                        <label class="col-md-2 control-label">
+                            生境型:
+                        </label>
+                        <textarea name="habitat" type="text" rows="5" class="form-control" placeholder="habitat"
+                            autocomplete="off"></textarea>
+                        <br>
+                        <!-- 生境型图片上传 -->
+                        <p style="margin-bottom: 5px;">生境型图片：</p>
+                        <div class="section">
+                            <div class="article">
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div style="clear: left;"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <label class="col-md-2 control-label">
+                            地理分布简介:
+                        </label>
+                        <textarea name="distribution" type="text" rows="5" class="form-control" placeholder="distribution"
+                            autocomplete="off"></textarea>
                         <br>
                         <!-- 地理分布图片上传 -->
                         <p style="margin-bottom: 5px;">地理分布：(<span style="color: red">最多上传4张</span>)</p>
@@ -101,12 +129,6 @@
                                 <div style="clear: left;"></div>
                             </div>
                         </div>
-                        <br>
-                        <label class="col-md-2 control-label">
-                            地理分布简介:
-                        </label>
-                        <textarea name="distribution" type="text" rows="5" class="form-control" placeholder="distribution"
-                            autocomplete="off" ></textarea>
                         <br>
                         <!-- 形态图片上传 -->
                         <p style="margin-bottom: 5px;">形态图：(<span style="color: red">最多上传9张</span>)</p>
@@ -191,56 +213,55 @@
                         <label class="col-md-2 control-label">
                             体色:
                         </label>
-                        <input name="body_color" type="text" class="form-control" placeholder="body_color" autocomplete="off"
-                            >
+                        <input name="body_color" type="text" class="form-control" placeholder="body_color" autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             雄体长:
                         </label>
                         <input name="body_length_male" type="text" class="form-control" placeholder="body_length"
-                            autocomplete="off" >
+                            autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             雌体长:
                         </label>
                         <input name="body_length_female" type="text" class="form-control" placeholder="body_length"
-                            autocomplete="off" >
+                            autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             雄前翅长:
                         </label>
                         <input name="forewing_length_male" type="text" class="form-control" placeholder="forewing_length"
-                            autocomplete="off" >
+                            autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             雌前翅长:
                         </label>
                         <input name="forewing_length_female" type="text" class="form-control" placeholder="forewing_length"
-                            autocomplete="off" >
+                            autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             后足股节长:
                         </label>
                         <input name="hindFemur_length_male" type="text" class="form-control" placeholder="hindFemur_length"
-                            autocomplete="off" >
+                            autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             后足股节长:
                         </label>
                         <input name="hindFemur_length_female" type="text" class="form-control" placeholder="hindFemur_length"
-                            autocomplete="off" >
+                            autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             前胸背板:
                         </label>
                         <input name="pronotum_length_male" type="text" class="form-control" placeholder="pronotum_length"
-                            autocomplete="off" >
+                            autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             前胸背板:
                         </label>
                         <input name="pronotum_length_female" type="text" class="form-control" placeholder="pronotum_length"
-                            autocomplete="off" >
+                            autocomplete="off">
                         <br>
                         <label class="col-md-2 control-label">
                             文献:
@@ -248,7 +269,7 @@
                         <div ng-repeat='item in literatureList' style="margin-left: 16.6%;margin-bottom: 10px;">
                             <span>{{$index+1}}</span>
                             <input name="literature" type="text" class="form-control" style="display:table-row;"
-                                placeholder="literature" autocomplete="off" >
+                                placeholder="literature" autocomplete="off">
                             <img ng-if="$last" src="./img/add.svg" alt="" ng-click="addItem()" style="width: 20px;height: 20px;cursor: pointer;">
                             <img ng-if="!$last" src="./img/minus.svg" alt="" ng-click="deleteItem($index)" style="width: 20px;height: 20px;cursor: pointer;">
                         </div>
@@ -256,8 +277,7 @@
                         <label class="col-md-2 control-label">
                             备注:
                         </label>
-                        <input name="remark" type="text" class="form-control" placeholder="remark" autocomplete="off"
-                            >
+                        <input name="remark" type="text" class="form-control" placeholder="remark" autocomplete="off">
                         <br>
                         <br>
                         <div class="text-right">
@@ -291,6 +311,11 @@
 
     .form-control {
         width: 500px
+    }
+
+    #cke_content {
+        margin-left: 220px;
+        width: 950px;
     }
 </style>
 <script>
