@@ -159,7 +159,7 @@ router
                 firstUpperCase(species.genus),
                 firstUpperCase(species.species),
                 species.introduction,
-                habitat,
+                species.habitat,
                 habitatSite,
                 distributionSite,
                 species.distribution,
