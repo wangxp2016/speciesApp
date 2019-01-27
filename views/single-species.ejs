@@ -79,7 +79,7 @@
                 <div style="margin-bottom: 50px;">
                     <ul class="nav dec-and-review-menu">
                         <li>
-                            <a class="active" data-toggle="tab" href="#">
+                            <a class="active" data-toggle="tab">
                                 <%=speciesDetail.species%></a>
                         </li>
                     </ul>
@@ -108,7 +108,10 @@
                                     <%=speciesDetail.genus%>
                                 </li>
                                 <li class="active fenlei" style="color:#aaa;">
-                                    <%=speciesDetail.species%>
+                                    <a href="<%=speciesDetail.linkAddr%>" style="text-decoration: none;color: #006cbf;"
+                                        target="_blank">
+                                        <%=speciesDetail.species%>
+                                    </a>
                                 </li>
                             </ol>
                         </div>
@@ -119,7 +122,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-8">
-                        <h2 class="title-text" style="margin-bottom: 20px;">introduction</h2>
+                        <h3 class="title-text" style="margin-bottom: 20px;">Introduction</h3>
                         <span style="text-align:justify">
                             <%-speciesDetail.introduction%></span>
                         <br>
@@ -141,9 +144,9 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="title-text" style="margin-bottom: 20px;">体色</h2>
+                        <h3 class="title-text" style="margin-bottom: 20px;">体色</h3>
                         <span>
-                            <%=speciesDetail.body_color%></span>
+                            <%-speciesDetail.body_color%></span>
                         <br>
                     </div>
                 </div>
@@ -152,26 +155,30 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="title-text" style="margin-bottom: 20px;">生境型</h2>
+                        <h3 class="title-text" style="margin-bottom: 20px;">生境型</h3>
                         <span>
-                            <%=speciesDetail.habitat%></span>
+                            <%-speciesDetail.habitat%></span>
                         <br>
                     </div>
                 </div>
                 <%}%>
-                <% let habitatpics = speciesDetail.habitat_img.split(',') %>                
+                <% let habitatpics = speciesDetail.habitat_img.split(',') %>
                 <% if(habitatpics[0].length>0){%>
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="product-large-thumb img-full text-center" style="margin: 0px auto;">
-                            <div class="easyzoom easyzoom--overlay">
-                                <a href="<%=habitatpics[0]%>">
-                                    <img style="width: 300px;height: 225px" src="<%=habitatpics[0]%>" alt="">
-                                </a>
-                                <a href="<%=habitatpics[0]%>" class="popup-img venobox" data-gall="myGallery"><i
-                                        class="fa fa-search"></i></a>
+                        <% for(let i=0,len=habitatpics.length;i<len;i++){ %>
+                        <div class="tab-pane fade show active" id="product<%=i%>" style="width: 300px;height: 200px;float: left;margin: 20px;">
+                            <div class="product-large-thumb img-full">
+                                <div class="easyzoom easyzoom--overlay">
+                                    <a href="<%=habitatpics[i]%>">
+                                        <img style="width: 300px;height: 190px" src="<%=habitatpics[i]%>" alt="">
+                                    </a>
+                                    <a href="<%=habitatpics[i]%>" class="popup-img venobox" data-gall="myGallery"><i
+                                            class="fa fa-search"></i></a>
+                                </div>
                             </div>
                         </div>
+                        <% } %>
                     </div>
                 </div>
                 <%}%>
@@ -180,7 +187,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="title-text" style="margin-bottom: 20px;">地理分布</h2>
+                        <h3 class="title-text" style="margin-bottom: 20px;">地理分布</h3>
                         <span>
                             <%=speciesDetail.distribution%></span>
                         <br>
@@ -206,7 +213,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="title-text" style="margin-bottom: 20px;">形态图</h2>
+                        <h3 class="title-text" style="margin-bottom: 20px;">形态图</h3>
                         <% for(let i=0,len=morphologypics.length;i<len;i++){ %>
                         <div class="tab-pane fade show active" id="product<%=i%>" style="width: 300px;height: 200px;float: left;margin: 20px;">
                             <div class="product-large-thumb img-full">
@@ -228,7 +235,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="product-review-tab">
-                            <h2 class="title-text" style="margin-bottom: 20px;">体型特征</h2>
+                            <h3 class="title-text" style="margin-bottom: 20px;">体型特征</h3>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -244,7 +251,7 @@
                                     <tr>
                                         <td><i style="font-size:20px" class="fa">&#xf222</i></td>
                                         <td>
-                                            <%=speciesDetail.body_color%>
+                                            <%=speciesDetail.nucleus_male%>
                                         </td>
                                         <td>
                                             <%=speciesDetail.body_length_male%>
@@ -262,7 +269,7 @@
                                     <tr class="success">
                                         <td><i style="font-size:20px" class="fa">&#xf221</i></td>
                                         <td>
-                                            <%=speciesDetail.body_color%>
+                                            <%=speciesDetail.nucleus_female%>
                                         </td>
                                         <td>
                                             <%=speciesDetail.body_length_female%>
@@ -287,7 +294,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h2 class="title-text" style="margin-bottom: 20px;">参考文献</h2>
+                        <h3 class="title-text" style="margin-bottom: 20px;">参考文献</h3>
                         <ul style="margin-left: 20px;">
                             <% let literatures = speciesDetail.literature.split("||") %>
                             <% for(let j=0,len=literatures.length;j<len;j++){ %>
@@ -301,12 +308,6 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <label class="control-label">
-                            link:
-                        </label>
-                        <span>
-                            <%=speciesDetail.remark%></span>
-                        <br>
                         <label class="control-label">
                             附件下载:
                         </label>

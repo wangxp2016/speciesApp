@@ -18,6 +18,7 @@ router
         try {
             const speciesTime = moment().unix(),
                 keyWord = species.species.substring(0, 1),
+                introduction_img = upload.pathHandle(ctx, 'introduction_img'), // 获取图片路径
                 habitat_img = upload.pathHandle(ctx, 'habitat_img'), // 获取图片路径
                 distribution_img = upload.pathHandle(ctx, 'distribution_img'), // 获取图片路径
                 morphology_img = upload.pathHandle(ctx, 'morphology_img'); // 获取图片路径
@@ -33,7 +34,9 @@ router
                 firstUpperCase(species.subfamily),
                 firstUpperCase(species.genus),
                 firstUpperCase(species.species),
+                species.linkAddr,
                 species.introduction,
+                introduction_img,
                 species.habitat,
                 habitat_img,
                 distribution_img,
@@ -48,6 +51,8 @@ router
                 species.hindFemur_length_female,
                 species.pronotum_length_male,
                 species.pronotum_length_female,
+                species.nucleus_male,
+                species.nucleus_female,
                 literature,
                 speciesTime,
                 species.remark,
@@ -121,9 +126,16 @@ router
         let species = ctx.request.body;
 
         try {
-            let habitatSite,distributionSite, morphologySite, literature = '';
+            let introductionSite, habitatSite, distributionSite, morphologySite, literature = '';
             if (species.literature && Array.isArray(species.literature)) {
                 literature = species.literature.join('||');
+            }
+
+            let introductionList = await speciesModel.introductionPicDel(species.id).picList(); // 全部地理分布图片路径
+            if (ctx.request.files['introduction_img']) {
+                introductionSite = upload.fileUpdate(ctx, 'introduction_img', introductionList, 'introduction_img'); // 修改图片路径
+            } else {
+                introductionSite = introductionList[0].introduction_img;
             }
 
             let habitatList = await speciesModel.habitatPicDel(species.id).picList(); // 全部地理分布图片路径
@@ -158,7 +170,9 @@ router
                 firstUpperCase(species.subfamily),
                 firstUpperCase(species.genus),
                 firstUpperCase(species.species),
+                species.linkAddr,
                 species.introduction,
+                introductionSite,
                 species.habitat,
                 habitatSite,
                 distributionSite,
@@ -173,6 +187,8 @@ router
                 species.hindFemur_length_female,
                 species.pronotum_length_male,
                 species.pronotum_length_female,
+                species.nucleus_male,
+                species.nucleus_female,
                 literature,
                 speciesTime,
                 species.remark,
@@ -187,6 +203,28 @@ router
             }
         } catch (e) {
             console.log(e);
+            ctx.body = info.err('操作失败，请重试！');
+        }
+    })
+    // 删除生境型图片
+    .get('/introductionPicDel', async (ctx) => {
+        const params = ctx.query,
+            list = await speciesModel.introductionPicDel(params.id).picList(); // 获取全部图片
+
+        // 删除图片文件及地址处理
+        const pic = upload.fileDelete(list, 'introduction_img', params.path);
+
+        // 执行删除
+        try {
+            const data = await speciesModel.introductionPicDel(params.id, pic).upPic();
+            if (data.affectedRows) {
+                // 删除成功
+                ctx.body = info.suc('删除成功！');
+            } else {
+                // 删除失败
+                ctx.body = info.err('删除失败，请重试！');
+            }
+        } catch (e) {
             ctx.body = info.err('操作失败，请重试！');
         }
     })

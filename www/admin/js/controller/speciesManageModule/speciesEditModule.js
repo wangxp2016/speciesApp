@@ -35,7 +35,42 @@ angular.module('app')
                     // removeDialogTabs: '/uploads', // 配置图片上传路径
                     // filebrowserImageUploadUrl: '/uploads?type=images'
                 });
-
+                // 富文本编辑器配置
+                CKEDITOR.replace('contentA', {
+                    toolbar: [
+                        ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                        ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+                        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                        ['Link', 'Unlink', 'Anchor'],
+                        ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                        '/',
+                        ['Styles', 'Format', 'Font', 'FontSize'],
+                        ['TextColor', 'BGColor'],
+                        ['Maximize', 'ShowBlocks', '-']
+                    ],
+                    height: 250,
+                    removePlugins: 'elementspath' // 移除编辑器底部状态栏显示的元素路径和调整编辑器大小的按钮 elementspath,resize
+                    // removeDialogTabs: '/uploads', // 配置图片上传路径
+                    // filebrowserImageUploadUrl: '/uploads?type=images'
+                });
+                // 富文本编辑器配置
+                CKEDITOR.replace('contentB', {
+                    toolbar: [
+                        ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript'],
+                        ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent'],
+                        ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                        ['Link', 'Unlink', 'Anchor'],
+                        ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak'],
+                        '/',
+                        ['Styles', 'Format', 'Font', 'FontSize'],
+                        ['TextColor', 'BGColor'],
+                        ['Maximize', 'ShowBlocks', '-']
+                    ],
+                    height: 250,
+                    removePlugins: 'elementspath' // 移除编辑器底部状态栏显示的元素路径和调整编辑器大小的按钮 elementspath,resize
+                    // removeDialogTabs: '/uploads', // 配置图片上传路径
+                    // filebrowserImageUploadUrl: '/uploads?type=images'
+                });
                 var literatures = data.literature.split("||");
                 $scope.literatureList = [];
                 for (let i in literatures) {
@@ -53,6 +88,12 @@ angular.module('app')
                 $scope.deleteItem = function (index) {
                     $scope.literatureList.splice(index, 1)
                 };
+                //物种介绍图片展示
+                $scope.introduction_img = $scope.species.introduction_img;
+                if ($scope.introduction_img) {
+                    $scope.introduction_img = $scope.introduction_img.split(',');
+                }
+
                 // 生境型图片展示
                 $scope.habitat_img = $scope.species.habitat_img;
                 if ($scope.habitat_img) {
@@ -68,6 +109,29 @@ angular.module('app')
                 if ($scope.morphology_img) {
                     $scope.morphology_img = $scope.morphology_img.split(',');
                 }
+                // 删除物种介绍图片
+                $scope.removeintroductionPic = function (path) {
+                    $scope.del = function () {
+                        $http.get('/admin/species/introductionPicDel', {
+                            params: {
+                                id: $stateParams.id,
+                                path: path
+                            }
+                        }).success(function (data) {
+                            $('.confirms').modal('hide');
+                            $('#alerts .modal-body').text(data.msg);
+                            $('#alerts').modal('show');
+                            if (data.i) {
+                                $scope.Tip = function () {
+                                    // 更新数据
+                                    setTimeout(function () {
+                                        location.reload()
+                                    }, 500)
+                                }
+                            }
+                        });
+                    };
+                };
                 // 删除生境型图片
                 $scope.removehabitatPic = function (path) {
                     $scope.del = function () {

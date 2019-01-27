@@ -54,6 +54,12 @@
                         <input name="species" type="text" class="form-control" placeholder="species" autocomplete="off"
                             required value="{{species.species}}">
                         <br>
+                        <label class="col-md-2 control-label">
+                            链接:
+                        </label>
+                        <input name="linkAddr" type="text" class="form-control" placeholder="link" autocomplete="off"
+                            value="{{species.linkAddr}}">
+                        <br>
                         <style>
                             .cke_maximized{top: 80px !important;}
                             .select2-container .select2-selection--single{border: 1px solid #a94442;}
@@ -63,17 +69,108 @@
                         </label>
                         <textarea name="introduction" id="content" class="ckeditor form-control" ng-bind-html="species.introduction"></textarea>
                         <br>
+                        <!-- 物种介绍图片 -->
+                        <p style="margin-bottom: 5px;">物种介绍图片：</p>
+                        <!-- 物种介绍图片上传 -->
+                        <div class="section">
+                            <div class="article">
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="introduction_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div style="clear: left;"></div>
+                            </div>
+                        </div>
+                        <br>
+                        <p style="margin-bottom: 5px;" ng-if="introduction_img">已上传物种介绍图片列表：</p>
+                        <div class="row">
+                            <div class="col-md-2" ng-repeat="p in introduction_img">
+                                <div class="thumbnail">
+                                    <img class="delete" src="./img/delete.png" data-toggle="modal" data-target=".confirms"
+                                        ng-click="removeintroductionPic(p)">
+                                    <img ng-src="{{p}}">
+                                </div>
+                            </div>
+                        </div>
+                        <br>
                         <label class="col-md-2 control-label">
                             生境型简介:
                         </label>
-                        <textarea name="habitat" type="text" rows="5" class="form-control" placeholder="habitat"
-                            autocomplete="off">{{species.habitat}}</textarea>
+                        <textarea name="habitat" id="contentA" class="ckeditor form-control" ng-bind-html="species.habitat"></textarea>
                         <br>
                         <!-- 生境型图片 -->
                         <p style="margin-bottom: 5px;">生境型图片：</p>
                         <!-- 生境型图片上传 -->
                         <div class="section">
                             <div class="article">
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
+                                <div class="item">
+                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
+                                    <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
+                                    <div class="preBlock">
+                                        <img class="preview" alt="" name="pic" width="190" height="190" />
+                                    </div>
+                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
+                                </div>
                                 <div class="item">
                                     <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
                                     <input name="habitat_img" type="file" class="upload_input" onchange="change(this)" />
@@ -104,34 +201,10 @@
                             autocomplete="off">{{species.distribution}}</textarea>
                         <br>
                         <!-- 地理分布图片 -->
-                        <p style="margin-bottom: 5px;">地理分布图片：(<span style="color: red">最多上传4张</span>)</p>
+                        <p style="margin-bottom: 5px;">地理分布图片：</p>
                         <!-- 地理分布图片上传 -->
                         <div class="section">
                             <div class="article">
-                                <div class="item">
-                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
-                                    <input name="distribution_img" type="file" class="upload_input" onchange="change(this)" />
-                                    <div class="preBlock">
-                                        <img class="preview" alt="" name="pic" width="190" height="190" />
-                                    </div>
-                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
-                                </div>
-                                <div class="item">
-                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
-                                    <input name="distribution_img" type="file" class="upload_input" onchange="change(this)" />
-                                    <div class="preBlock">
-                                        <img class="preview" alt="" name="pic" width="190" height="190" />
-                                    </div>
-                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
-                                </div>
-                                <div class="item">
-                                    <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
-                                    <input name="distribution_img" type="file" class="upload_input" onchange="change(this)" />
-                                    <div class="preBlock">
-                                        <img class="preview" alt="" name="pic" width="190" height="190" />
-                                    </div>
-                                    <img class="delete" onclick="deleteImg(this)" src="./img/delete.png" />
-                                </div>
                                 <div class="item">
                                     <img class="addImg" onclick="clickImg(this);" src="./img/addImg.png" />
                                     <input name="distribution_img" type="file" class="upload_input" onchange="change(this)" />
@@ -251,8 +324,7 @@
                         <label class="col-md-2 control-label">
                             体色:
                         </label>
-                        <input name="body_color" type="text" class="form-control" placeholder="body_color" autocomplete="off"
-                            value="{{species.body_color}}">
+                        <textarea name="body_color" id="contentB" class="ckeditor form-control" ng-bind-html="species.body_color"></textarea>
                         <br>
                         <label class="col-md-2 control-label">
                             雄体长:
@@ -279,28 +351,40 @@
                             autocomplete="off" value="{{species.forewing_length_female}}">
                         <br>
                         <label class="col-md-2 control-label">
-                            后足股节长:
+                            雄后足股节长:
                         </label>
                         <input name="hindFemur_length_male" type="text" class="form-control" placeholder="hindFemur_length"
                             autocomplete="off" value="{{species.hindFemur_length_male}}">
                         <br>
                         <label class="col-md-2 control-label">
-                            后足股节长:
+                            雌后足股节长:
                         </label>
                         <input name="hindFemur_length_female" type="text" class="form-control" placeholder="hindFemur_length"
                             autocomplete="off" value="{{species.hindFemur_length_female}}">
                         <br>
                         <label class="col-md-2 control-label">
-                            前胸背板:
+                            雄前胸背板:
                         </label>
                         <input name="pronotum_length_male" type="text" class="form-control" placeholder="pronotum_length"
                             autocomplete="off" value="{{species.pronotum_length_male}}">
                         <br>
                         <label class="col-md-2 control-label">
-                            前胸背板:
+                            雌前胸背板:
                         </label>
                         <input name="pronotum_length_female" type="text" class="form-control" placeholder="pronotum_length"
                             autocomplete="off" value="{{species.pronotum_length_female}}">
+                        <br>
+                        <label class="col-md-2 control-label">
+                            雄细胞核大小:
+                        </label>
+                        <input name="nucleus_male" type="text" class="form-control" placeholder="nucleus" autocomplete="off"
+                            value="{{species.nucleus_male}}">
+                        <br>
+                        <label class="col-md-2 control-label">
+                            雌细胞核大小:
+                        </label>
+                        <input name="nucleus_female" type="text" class="form-control" placeholder="nucleus"
+                            autocomplete="off" value="{{species.nucleus_female}}">
                         <br>
                         <label class="col-md-2 control-label">
                             文献:
@@ -368,7 +452,9 @@
         width: 500px
     }
 
-    #cke_content {
+    #cke_content,
+    #cke_contentA,
+    #cke_contentB {
         margin-left: 194px;
         width: 800px;
     }
