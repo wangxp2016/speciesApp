@@ -19,14 +19,15 @@
 		<div class="our-history-area mt-20">
 			<div class="container">
 				<div class="row">
-					<div class="col-md-8">
+					<div class="col-md-7">
 						<p class="text-center" style="background-color: #e8e8e8;padding:10px 0"><span>About project</span></p>
-						<p>
+						<p style="word-break:break-all;word-wrap:break-word;">
 							<%=JSON.parse(websiteInfo[0].brand).speciesInfo%>
 						</p>
 					</div>
-					<div class="col-md-4">
-						<p class="text-center" style="background-color: #e8e8e8;padding:10px 0"><span>Tools Quick Start </span></p>
+					<div class="col-md-5">
+                        <p class="text-center" style="background-color: #e8e8e8;padding:10px 0"><span>Statistics valid species counts</span></p>
+                        <div id="container" style="height: 300px"></div>
 					</div>
 				</div>
 			</div>
@@ -35,8 +36,50 @@
 		<% include footer.ejs %>
 	</div>
 	<% include script.ejs %>
-	<script>
-	</script>
+    <script type="text/javascript">
+        var dom = document.getElementById("container");
+        var myChart = echarts.init(dom);
+        var app = {};
+        option = null;
+        var data = '<%- JSON.stringify(superfamily)%>' ;
+        option = {
+            title : {
+                text: '',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                type: 'scroll',
+                orient: 'vertical',
+                right: 10,
+                top: 20,
+                bottom: 20
+            },
+            series : [
+                {
+                    name: 'Superfamily',
+                    type: 'pie',
+                    radius : '55%',
+                    center: ['40%', '50%'],
+                    data: JSON.parse(data),
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+        if (option && typeof option === "object") {
+            myChart.setOption(option, true);
+        }
+    </script>
+        
 </body>
 
 </html>

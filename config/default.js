@@ -1,10 +1,10 @@
-const mysql=require('mysql');
-const co=require('co-mysql');
+const mysql = require('mysql');
+const co = require('co-mysql');
 
 // 配置信息
-const config={
+const config = {
     // 启动端口
-    port: 8080,
+    port: 3000,
     // 数据库配置
     db: {
         database: 'juyi',
@@ -16,9 +16,9 @@ const config={
 };
 
 // 数据库操作设置
-const sql=co(mysql.createPool(config.db));
+const sql = co(mysql.createPool(config.db));
 
-module.exports={
+module.exports = {
     config,
     sql
 };
