@@ -1,138 +1,151 @@
-﻿<!doctype html>
+﻿<!DOCTYPE html>
 <html class="no-js" lang="en">
-
-<head>
+  <head>
     <% include meta.ejs %>
-</head>
+  </head>
 
-<body>
-
-
+  <body>
     <!--[if lt IE 8]>
-	<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-	<![endif]-->
+      <p class="browserupgrade">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="http://browsehappy.com/">upgrade your browser</a> to improve
+        your experience.
+      </p>
+    <![endif]-->
 
     <div class="wrapper">
-        <% include header.ejs %>
-        <!--Breadcrumb One Start-->
-        <div class="breadcrumb-one mb-120">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="breadcrumb-img">
-                            <img src="/layout/img/page-banner/product-banner.jpg" alt="">
-                        </div>
-                        <div class="breadcrumb-content">
-                            <ul>
-                                <li><a href="/">Home</a></li>
-                                <li class="active">Single Species</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+      <% include header.ejs %>
+      <!--Breadcrumb One Start-->
+      <div class="breadcrumb-one mb-120">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="breadcrumb-img">
+                <img src="/layout/img/page-banner/product-banner.jpg" alt="" />
+              </div>
+              <div class="breadcrumb-content">
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li class="active">Single Species</li>
+                </ul>
+              </div>
             </div>
+          </div>
         </div>
-        <div class="product-description-review-area mb-100">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="product-review-tab">
-                            <!--Review And Description Tab Menu Start-->
-                            <ul class="nav dec-and-review-menu">
-                                <li>
-                                    <a class="active" data-toggle="tab" href="#description">物种信息</a>
-                                </li>
-                            </ul>
+      </div>
+      <div class="product-description-review-area mb-100">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="product-review-tab">
+                <!--Review And Description Tab Menu Start-->
+                <ul class="nav dec-and-review-menu">
+                  <li>
+                    <a class="active" data-toggle="tab" href="#description"
+                      >Species Tree</a
+                    >
+                  </li>
+                </ul>
 
-                            <div class="left_echarts" id="main" style="height:600px;width:100%;"></div>
+                <div
+                  class="left_echarts"
+                  id="main"
+                  style="height:600px;width:100%;"
+                ></div>
 
-                            <!-- file download end-->
-                            <!--Review And Description Tab Content Start-->
-                            <div class="tab-content product-review-content-tab" id="myTabContent-4">
-                                <div class="tab-pane fade active show" id="description">
-                                    <div class="single-product-description">
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!--Review And Description Tab Content End-->
-                        </div>
-                    </div>
+                <!-- file download end-->
+                <!--Review And Description Tab Content Start-->
+                <div
+                  class="tab-content product-review-content-tab"
+                  id="myTabContent-4"
+                >
+                  <div class="tab-pane fade active show" id="description">
+                    <div class="single-product-description"></div>
+                  </div>
                 </div>
+                <!--Review And Description Tab Content End-->
+              </div>
             </div>
+          </div>
         </div>
-        <% include footer.ejs %>
+      </div>
+      <% include footer.ejs %>
     </div>
     <% include script.ejs %>
     <script src="/layout/js/lodash.min.js"></script>
     <script src="/layout/js/uitl.js"></script>
     <script type="text/javascript">
-        $(function () {
-            var myChart = echarts.init(document.getElementById('main'));
-            myChart.showLoading();
-            $.get('/species/speciesTree', function (data) {
-                var originData = data;
-                myChart.hideLoading();
-                var option = {
-                    tooltip: {
-                        trigger: 'item',
-                        triggerOn: 'mousemove'
-                    },
-                    series: [{
-                        type: 'tree',
-                        data: [data],
-                        top: '1%',
-                        left: '7%',
-                        bottom: '1%',
-                        right: '20%',
+      $(function() {
+        var myChart = echarts.init(document.getElementById('main'))
+        myChart.showLoading()
+        $.get('/species/speciesTree', function(data) {
+          var originData = data
+          myChart.hideLoading()
+          var option = {
+            tooltip: {
+              trigger: 'item',
+              triggerOn: 'mousemove'
+            },
+            series: [
+              {
+                type: 'tree',
+                data: [data],
+                top: '1%',
+                left: '7%',
+                bottom: '1%',
+                right: '20%',
 
-                        symbolSize: 7,
+                symbolSize: 7,
 
-                        label: {
-                            normal: {
-                                position: 'left',
-                                verticalAlign: 'middle',
-                                align: 'right',
-                                fontSize: 9
-                            }
-                        },
+                label: {
+                  normal: {
+                    position: 'left',
+                    verticalAlign: 'middle',
+                    align: 'right',
+                    fontSize: 9
+                  }
+                },
 
-                        leaves: {
-                            label: {
-                                normal: {
-                                    position: 'right',
-                                    verticalAlign: 'middle',
-                                    align: 'left'
-                                }
-                            }
-                        },
-
-                        expandAndCollapse: true,
-                        animationDuration: 550,
-                        initialTreeDepth: 6,
-                        animationDurationUpdate: 750
-                    }]
-                }
-                myChart.setOption(option);
-                myChart.on('click', function (params) {
-                    var treeData = params.data;
-                    if (treeData.children && treeData.children.length == 0) {
-                        if (treeData.type == 'species') {
-                            window.location.href = '/speciesDetail?species=' + treeData.name;
-                        } else {
-                            $.get('/species/getDataByKeyWord?name=' + treeData.name + '&type=' +
-                                treeData.type,
-                                function (data) {
-                                    var newData = addNode([originData], data, -1);
-                                    option.series[0].data = newData;
-                                    myChart.setOption(option);
-                                })
-                        }
+                leaves: {
+                  label: {
+                    normal: {
+                      position: 'right',
+                      verticalAlign: 'middle',
+                      align: 'left'
                     }
-                });
-            });
-        })
-    </script>
-</body>
+                  }
+                },
 
+                expandAndCollapse: true,
+                animationDuration: 550,
+                initialTreeDepth: 6,
+                animationDurationUpdate: 750
+              }
+            ]
+          }
+          myChart.setOption(option)
+          myChart.on('click', function(params) {
+            var treeData = params.data
+            if (treeData.children && treeData.children.length == 0) {
+              if (treeData.type == 'species') {
+                window.location.href = '/speciesDetail?species=' + treeData.name
+              } else {
+                $.get(
+                  '/species/getDataByKeyWord?name=' +
+                    treeData.name +
+                    '&type=' +
+                    treeData.type,
+                  function(data) {
+                    var newData = addNode([originData], data, -1)
+                    option.series[0].data = newData
+                    myChart.setOption(option)
+                  }
+                )
+              }
+            }
+          })
+        })
+      })
+    </script>
+  </body>
 </html>

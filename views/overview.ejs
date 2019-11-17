@@ -158,10 +158,10 @@
                 currentPage: parseInt('<%=speciesList.page%>'),
                 activeClass: 'actives',
                 disableClass: 'actives',
-                first: '<li class="first"><a href="/overview?page=1&word=' + word + '">首页</a></li>',
-                prev: '<li class="prev""><a  href="/overview?page={{page}}&word=' + word + '">上一页</a></li>',
-                next: '<li class="next"><a  href="/overview?page={{page}}&word=' + word + '">下一页</a></li>',
-                last: '<li class="last"><a  href="/overview?page={{totalPages}}&word=' + word + '">尾页</a></li>',
+                first: '<li class="first"><a href="/overview?page=1&word=' + word + '">First</a></li>',
+                prev: '<li class="prev""><a  href="/overview?page={{page}}&word=' + word + '">Previous</a></li>',
+                next: '<li class="next"><a  href="/overview?page={{page}}&word=' + word + '">Next</a></li>',
+                last: '<li class="last"><a  href="/overview?page={{totalPages}}&word=' + word + '">Last</a></li>',
                 page: '<li class="page"><a  href="/overview?page={{page}}&word=' + word + '">{{page}}</a></li>',
                 onPageChange: function (num) {
                     // $('#text').html('当前第' + num + '页');

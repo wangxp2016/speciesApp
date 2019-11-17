@@ -88,7 +88,7 @@
                     <div class="col-md-12">
                         <div>
                             <ol class="breadcrumb " style="margin-bottom: 0px;padding:0px;background-color:#fff;"><span
-                                    class="glyphicon glyphicon-tree-deciduous" style="color:#9d9d9d;" title="分类地位"></span>
+                                    class="glyphicon glyphicon-tree-deciduous" style="color:#9d9d9d;"></span>
                                 <li>
                                     <%=speciesDetail.order_m%>
                                 </li>
@@ -144,7 +144,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="title-text" style="margin-bottom: 20px;">体色</h3>
+                        <h3 class="title-text" style="margin-bottom: 20px;">Body Color</h3>
                         <span>
                             <%-speciesDetail.body_color%></span>
                         <br>
@@ -155,7 +155,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="title-text" style="margin-bottom: 20px;">生境型</h3>
+                        <h3 class="title-text" style="margin-bottom: 20px;">Habitat</h3>
                         <span>
                             <%-speciesDetail.habitat%></span>
                         <br>
@@ -187,7 +187,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="title-text" style="margin-bottom: 20px;">地理分布</h3>
+                        <h3 class="title-text" style="margin-bottom: 20px;">Distribution</h3>
                         <span>
                             <%=speciesDetail.distribution%></span>
                         <br>
@@ -213,7 +213,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="title-text" style="margin-bottom: 20px;">形态图</h3>
+                        <h3 class="title-text" style="margin-bottom: 20px;">Morphology</h3>
                         <% for(let i=0,len=morphologypics.length;i<len;i++){ %>
                         <div class="tab-pane fade show active" id="product<%=i%>" style="width: 300px;height: 200px;float: left;margin: 20px;">
                             <div class="product-large-thumb img-full">
@@ -235,16 +235,16 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="product-review-tab">
-                            <h3 class="title-text" style="margin-bottom: 20px;">体型特征</h3>
+                            <h3 class="title-text" style="margin-bottom: 20px;">Physical Characteristic</h3>
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th></th>
-                                        <th>细胞核大小</th>
-                                        <th>体长</th>
-                                        <th>前翅长</th>
-                                        <th>后足股节长</th>
-                                        <th>前胸背板长</th>
+                                        <th>Genome Size</th>
+                                        <th>Body Length</th>
+                                        <th>Forewing Length</th>
+                                        <th>Hind Femur Length</th>
+                                        <th>Pronotum Length </th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -294,7 +294,7 @@
                 <hr style="margin: 30px 0;">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="title-text" style="margin-bottom: 20px;">参考文献</h3>
+                        <h3 class="title-text" style="margin-bottom: 20px;">References</h3>
                         <ul style="margin-left: 20px;">
                             <% let literatures = speciesDetail.literature.split("||") %>
                             <% for(let j=0,len=literatures.length;j<len;j++){ %>
@@ -309,7 +309,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label class="control-label">
-                            附件下载:
+                            download:
                         </label>
                         <div id="main" style="min-height: 10px">
                             <ul id="browser" class="filetree">
